@@ -5,7 +5,7 @@
 
 //./node_modules/.bin/jasmine-ts src/something.spec.ts
 
-import Logger from '../src/platform/tools/tools.logger';
+import Logger from '../src/tools/tools.logger';
 import { Builder, Reader, Convertor } from '../src/index';
 import { AdvancedTypes } from './example/test.advanced.types';
 
