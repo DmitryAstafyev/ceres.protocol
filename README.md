@@ -4,7 +4,7 @@ Generates protocol description (typescript) from JSON sources. Allows convert pa
 # Example of usage
 
 Let's create a simple chat message entity. Create file "chat.message.json" and put the next code there:
-```json
+```
 {
     "Message": {
         "clientId"  : "string",
@@ -41,7 +41,8 @@ A few notes here:
 
 That's all! We can start use out generated protocol. Create "chat.message.ts" and try it:
 
-[VIDEO HERE]
+[gif]: https://github.com/DmitryAstafyev/ceres.protocol/raw/master/docs/assets/example_0.gif
+
 
 Benifits here:
 - you have tips with a description of properties, which has class "Message". 
@@ -107,7 +108,7 @@ console.log(JSONString);
 
 As you can see we switched protocol into debug-mode and now converted message looks like:
 
-```json
+```
 {"__signature":"70D1C8A2","clientId":"xxx-xxx-xxx","guid":"B297B8EE-1585-250A-FD48-1E166DA285DC","message":"some message here","created":1550338257713}
 ```
 
@@ -148,7 +149,7 @@ Ceres.protocol as sources file uses a simple JSON format. Each property can be:
 - definition of `enum`
 - definition of `array`
 
-```json
+```
 {
     /* Class Message */
     "Message": {
@@ -185,7 +186,7 @@ Ceres.protocol as sources file uses a simple JSON format. Each property can be:
 ### Optional properties
 
 With symbol `?` you can define property, which can be ignored (to be not defined)
-```json
+```
 {
     "Message": {
         "clientId"  : "string",
@@ -200,7 +201,7 @@ With symbol `?` you can define property, which can be ignored (to be not defined
 ### Inheritance
 Each object in JSON is a class. Each nested object in JSON is a class, which include properties on the parent object.
 
-```json
+```
 {
     "Entity_A": {
         "prop_a": "string",
@@ -240,7 +241,7 @@ To avoid inheritance you can:
 - put a definition of entity into root-segment
 - use symbol `@` in the name of property
 
-```json
+```
 {
     "Entity_A": {
         "prop_a": "string",
