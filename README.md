@@ -1,5 +1,3 @@
-> Documentation is in progress
-
 # Ceres Typescript protocol generator for network usage
 Generates protocol description (typescript) from JSON sources. Allows convert packages to binary data or simple JSON format.
 
@@ -7,6 +5,7 @@ Generates protocol description (typescript) from JSON sources. Allows convert pa
 
 - [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
 - [Table of content](#table-of-content)
+- [Installation](#installation)
 - [Example of usage](#example-of-usage)
 - [Documentation](#documentation)
   - [Syntax](#syntax)
@@ -18,7 +17,27 @@ Generates protocol description (typescript) from JSON sources. Allows convert pa
   - [Advanced types](#advanced-types)
   - [Nested sources (findin)](#nested-sources-findin)
 - [Encode / decode](#encode--decode)
+  - [Encode](#encode)
   - [Decode](#decode)
+- [Protocol API](#protocol-api)
+  - [Access to API](#access-to-api)
+  - [Methods](#methods)
+- [CLI (generate protocol implementation)](#cli-generate-protocol-implementation)
+- [Network usage tips](#network-usage-tips)
+  - [Multiple packets](#multiple-packets)
+  - [Debug mode](#debug-mode)
+
+# Installation
+> **Note**: in most cases, you will not need ceres.protocol as a dependency, because generated protocol implementation already has everything it needs to work. 
+
+Install locally
+```
+npm install ceres.protocol --save-dev
+```
+Or global installation (the recommended way)
+```
+npm install ceres.protocol --global
+```
 
 # Example of usage
 
@@ -553,7 +572,7 @@ And if ceres.protocol installed globably
 ```
 ceres.protocol -s ./chat.message.json -o ./simple.ts -r
 ```
-
+## Encode
 Now you able to create a chat message amd encode it:
 
 ```typescript
@@ -635,12 +654,117 @@ const decodedMessage: Protocol.TProtocolTypes | Error = Protocol.parse(bytes);
 const decodedMessage: Protocol.TProtocolTypes | Error = Protocol.Message.parse(bytes);
 
 ```
+# Protocol API
+The major benefit of ceres.protocol - you don't need ceres.protocol library to use generated protocol. All you need already will be included in protocol implementation. 
+
+That's why you never need to install ceres.protocol as a dependency, will be enough to add it as developer dependency. 
+
+## Access to API
+After your protocol implementation is generated you have access to API:
+```typescript
+import * as Protocol from './simple';
+
+// Access to defitions of entities:
+const message: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'some message here'
+});
+
+const someBinaryData = [...];
+
+// Access to protocol API
+const decoded = Protocol.parse(someBinaryData);
+```
+
+## Methods
+
+| Name | Arguments | Description |
+| --- | --- | --- |
+| parse | parse(**source**: *TIncomeData*, **target**?: *any*): *any* | Will try to convert source into instance of entity from current implementation of protocol. |
+| parseFrom | parseFrom(**source**: *TIncomeData*, **protocols**: *any* \| *any[]*): *any* | Work same like method **parse**, but looking for implementation of entity not only in current implementation of protocol, but also in protocols listed in argument protocols: *Protocols[]* |
+| stringify | stringify(**target**: *any*, **classRef**: *any*): *string* \| *Uint8Array* \| *Error*  | Convert (encode) entity to package (binary or string in debug mode). It doesn't make sence to use this method globaly, better call it from instance of entity: ```message.stringify();``` |
+| join | join(...**items**: *any[]*): *string* \| *Uint8Array* \| *Error* | This method will be useful if you need pack a few protocol packets into one. |
+| split | split(**source**: *string* \| *Uint8Array*): *string[]* \| *Uint8Array[]* \| *Error* | Allows split package (with a few protocol packets) |
+| isPackage | isPackage(**source**: *any*): *boolean* | Checks is defined source package (has a few protocol packets) or single protocol packet |
 
 
+# CLI (generate protocol implementation)
 
+If you install ceres.protocol locally:
+```
+./node_modules/.bin/ceres.protocol -s path_and_name_of_JSON_file -o ./path_and_name_of_result_TS_file
+```
+And if ceres.protocol installed globably
+```
+ceres.protocol -s path_and_name_of_JSON_file -o ./path_and_name_of_result_TS_file
+```
 
+Flags:
+- flag `-s` or `--source` next after you should define path to JSON source file
+- flag `-o` or `--output` next after you should define path and name of TypeScript output file
+- flag `-r` or `--replace` tells ceres.protocol to overwrite output-file if it exists.
 
+# Network usage tips
+## Multiple packets 
+It could be you will need to send not one single packet, but a few of them. If you will join ceres.protocol packets manually you will lost a possobility to decode it. But you can easy do it with protocol implementation.
 
+```typescript
+import * as Protocol from './simple';
 
+// Create message A
+const messageA: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'message A'
+});
 
+// Create message 2
+const messageB: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'message B'
+});
+
+// Create package
+const packageOfData = Protocol.join(
+    messageA.stringify(),
+    messageB.stringify()
+);
+
+// Now we can send somewhere both messages in one package
+```
+
+For example on server side we can unpack our messages:
+```typescript
+import * as Protocol from './simple';
+
+let packets: any[] = [];
+
+// Check: is income data package or not
+if (Protocol.isPackage(packageOfData)) {
+    // Yes, this is package
+    packets = Protocol.split(packageOfData);
+} else {
+    // No, this is single packet
+    packets = [packageOfData];
+}
+
+// Decode all
+const decoded: any[] = packets.map((packet: any) => {
+    return Protocol.parse(packet);
+});
+```
+## Debug mode
+To switch protocol into **debug** mode you should do next:
+```typescript
+import * as Protocol from './simple';
+// Switch protocol to debug
+Protocol.Protocol.state.debug(true);
+```
+After you switching into debug mode, all message will be convereted into string. It will allow you to see messages in network trafic as readble text messages. Like it:
+
+```
+{"__signature":"70D1C8A2","clientId":"xxx-xxx-xxx","guid":"B297B8EE-1585-250A-FD48-1E166DA285DC","message":"some message here","created":1550338257713}
+```
 
