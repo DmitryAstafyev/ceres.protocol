@@ -59,7 +59,7 @@ typings/
 
 # next.js build output
 .next
-
+.vscode
 # mac
 .DS_Store
 __docs

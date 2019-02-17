@@ -3,6 +3,23 @@
 # Ceres Typescript protocol generator for network usage
 Generates protocol description (typescript) from JSON sources. Allows convert packages to binary data or simple JSON format.
 
+# Table of content
+
+- [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
+- [Table of content](#table-of-content)
+- [Example of usage](#example-of-usage)
+- [Documentation](#documentation)
+  - [Syntax](#syntax)
+    - [JSON format](#json-format)
+    - [Optional properties](#optional-properties)
+    - [Inheritance](#inheritance)
+  - [Primitive types](#primitive-types)
+  - [Type aliases](#type-aliases)
+  - [Advanced types](#advanced-types)
+  - [Nested sources (findin)](#nested-sources-findin)
+- [Encode / decode](#encode--decode)
+  - [Decode](#decode)
+
 # Example of usage
 
 Let's create a simple chat message entity. Create file "chat.message.json" and put the next code there:
@@ -472,3 +489,158 @@ User {
   lastname: 'Pitt',
   email: 'fake@email.com' }
 ```
+
+## Nested sources (findin)
+In some cases to make code easy to read better to split JSON description into a few files. It's possible with ceres.protocol via very simple synax:
+
+```
+{
+    /* Attach description of State section*/
+    "State:findin": "protocol.state.json",
+    /* Attach description of Data section*/
+    "Data:findin": "protocol.data.json",
+    /* Description of message section */
+    "Message": {
+        "clientId"  : "asciiString",
+        "guid?"     : "guid",
+        "Handshake": {
+            "Response": {
+                "allowed"   : "boolean",
+                "reason?"   : "Reasons",
+                "error?"    : "string",
+                "Reasons"   : ["FAIL_AUTH", "NO_TOKEN_FOUND", "NO_CLIENT_ID_FOUND"]
+            }
+        },
+    },
+    "ConnectionError": {
+        "reason": "array<Reasons>",
+        "message": "string",
+        "Reasons": ["FAIL_AUTH", "NO_TOKEN_FOUND", "NO_CLIENT_ID_FOUND", "NO_TOKEN_PROVIDED", "TOKEN_IS_WRONG"]
+    },
+    "Disconnect": {
+        "reason": "Reasons",
+        "message": "string",
+        "Reasons": ["SHUTDOWN"]
+    },
+    "version": "0.0.1"
+}
+```
+
+With keyword **findin** we can tell ceres.protocol where it should find definitions of entity.
+
+# Encode / decode
+Ceres.protocol was developed for network. Each entity (instance of class) can be encoded to be sent via network.
+
+Let's create a simple chat message entity. Create file "chat.message.json" and put the next code there:
+```
+{
+    "Message": {
+        "clientId"  : "string",
+        "guid?"     : "guid",
+        "message"   : "string",
+        "created"   : "datetime"
+    },
+    "version": "0.0.1"
+}
+```
+
+Generate protocol from this sources. If you install ceres.protocol locally:
+
+```
+./node_modules/.bin/ceres.protocol -s ./chat.message.json -o ./simple.ts -r
+```
+And if ceres.protocol installed globably
+```
+ceres.protocol -s ./chat.message.json -o ./simple.ts -r
+```
+
+Now you able to create a chat message amd encode it:
+
+```typescript
+import * as Protocol from './simple';
+
+const message: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'some message here'
+});
+
+// Convert (encode) our message to binary
+const bytes: Uint8Array | string = message.stringify();
+// Create buffer if we need it
+const buffer = Buffer.from(bytes.buffer);
+// Send binary data somewhere
+```
+
+Our message will be converted to data like:
+```
+64 79 00 00 00 0b 5f 5f 73 69 67 6e 61 74 75 72 65 09 08 00 00 00 37 30 44 31 43 38 41 32 01 61 0a 0b 00 00 00 78 78 78 2d 78 78 78 2d 78 78 78 01 62 ...
+```
+
+Basicaly within each package, which we are sending, we can safe 20-30% of trafic.
+
+To debug your application it could be useful to see in network trafic not binary data, but readble text data. To do it, you can switch protocol into **debug** mode.
+
+Let's do it:
+```typescript
+... cut ...
+
+// Switch protocol to debug
+Protocol.Protocol.state.debug(true);
+// Convert (encode) message
+const JSONString: Uint8Array | string = message.stringify();
+// Show result in console
+console.log(JSONString);
+```
+
+As you can see we switched protocol into **debug** mode and now converted message looks like:
+
+```
+{"__signature":"70D1C8A2","clientId":"xxx-xxx-xxx","guid":"B297B8EE-1585-250A-FD48-1E166DA285DC","message":"some message here","created":1550338257713}
+```
+
+Again, this is useful to debug your application. And you already can compare the size of the string result and buffer. 
+
+## Decode
+Protocol will automaticaly recognize message (never mind is it binary or string (in debug mode)). All you need: call method **parse** from instance of your Protocol.
+
+> Note: you should use **same** protocol implementation, which was used to generate and encode message.
+
+```typescript
+import * as Protocol from './simple';
+
+const message: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'some message here'
+});
+
+// Convert our message to binary
+const bytes: Uint8Array | string = message.stringify();
+//Decode message from bytes to instance
+const decodedMessage: Protocol.TProtocolTypes | Error = Protocol.parse(bytes);
+
+if (decodedMessage instanceof Protocol.Message) {
+    console.log('Message was gotten');
+}
+```
+
+You can use global method **parse** or bound method:
+
+```typescript
+// Decode using global method "parse"
+const decodedMessage: Protocol.TProtocolTypes | Error = Protocol.parse(bytes);
+
+// Decode using bound method "parse"
+const decodedMessage: Protocol.TProtocolTypes | Error = Protocol.Message.parse(bytes);
+
+```
+
+
+
+
+
+
+
+
+
