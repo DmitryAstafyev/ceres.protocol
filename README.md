@@ -1,4 +1,4 @@
-# CLI and documentation in progress & testing
+> Documentation is in progress
 
 # Ceres Typescript protocol generator for network usage
 Generates protocol description (typescript) from JSON sources. Allows convert packages to binary data or simple JSON format.

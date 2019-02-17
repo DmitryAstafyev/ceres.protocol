@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 "use strict";
 /* tslint:disable:no-console */
 Object.defineProperty(exports, "__esModule", { value: true });
