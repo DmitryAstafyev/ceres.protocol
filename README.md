@@ -86,7 +86,7 @@ Our message will be converted to data like:
 
 Basicaly within each package, which we are sending, we can safe 20-30% of trafic.
 
-Probably you already notices: method `stringify` could return also "string". You can switch (on fly) you protocol to debug mode and in this case `stringify` will return you JSON-string.  
+Probably you already notices: method `stringify` could return also "string". You can switch (on fly) your protocol to debug mode and in this case `stringify` will return JSON-string.  
 
 > This is very useful to debug your app because you will see the content of all your messages.
 
