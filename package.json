@@ -29,5 +29,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/DmitryAstafyev/ceres.protocol.git"
-  }
+  },
+  "keywords": ["network", "protocol", "JSON", "binary", "typescript", "encode", "decode", "converting"]
 }
