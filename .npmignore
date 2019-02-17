@@ -2,3 +2,6 @@ examples
 docs
 .vscode
 spec
+jakefile
+./src
+logo.ascii
