@@ -1,6 +1,6 @@
 {
   "name": "ceres.protocol",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "Network Protocol based JSON format. Coverting JSON description to TS classes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,7 @@
     "test": "./node_modules/.bin/jasmine-ts ./spec/protocol.spec.ts",
     "test-generate": "ts-node ./cli/src/generate.ts -s ./spec/example/protocol.json -o ./spec/example/example.ts -r"
   },
-  "license": "MIT",
+  "license": "Apache 2",
   "devDependencies": {
     "@types/jasmine": "^2.8.16",
     "@types/node": "^10.12.26",
