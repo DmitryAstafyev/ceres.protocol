@@ -14,6 +14,7 @@ If you have almost any kind of communication between parts of your application (
 - ceres.protocol allows adding advanced types of data (to inject addition validation procedures)
 - ceres.protocol creates binary packages to safe traffic.
 - ceres.protocol validates data on all steps: generating data, encoding data and decoding. Such strict politic allows prevent appearing any incorrect messages in the communication process and allows developer "catch" it on generating step.
+- the developing process became much easier because all properties (and types of it) will be highlighted by IDE. A developer should not "back" to documentation if he forgot what some message include - IDE will show all available properties of an entity.
 
 # Table of content
 
