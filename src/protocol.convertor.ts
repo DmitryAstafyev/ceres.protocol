@@ -2,6 +2,7 @@ import { EEntityType, EntityType, IEntity } from './protocol.entity';
 import { IInejection, Injections } from './protocol.injections';
 
 import * as Path from 'path';
+import * as FS from 'fs';
 import * as Tools from './tools/index';
 
 const DEFAULT_INJECTIONS = [
@@ -56,7 +57,10 @@ export class Convertor {
                     return reject(new Error(this._logger.error(`Cannot conver protocol due error(s):\n${message}`)));
                 }
                 // Add to injections
-                injections.unshift(Path.join(__dirname, adTypes.path));
+                if (!FS.existsSync(adTypes.path)) {
+                    return reject(new Error(`Fail to find file: ${adTypes.path}`));
+                }
+                injections.unshift(adTypes.path);
             }
             // Get base
             let base: string = '';

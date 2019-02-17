@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const protocol_entity_1 = require("./protocol.entity");
 const protocol_injections_1 = require("./protocol.injections");
 const Path = require("path");
+const FS = require("fs");
 const Tools = require("./tools/index");
 const DEFAULT_INJECTIONS = [
     './injections/injection.convertor.ts',
@@ -39,7 +40,10 @@ class Convertor {
                     return reject(new Error(this._logger.error(`Cannot conver protocol due error(s):\n${message}`)));
                 }
                 // Add to injections
-                injections.unshift(Path.join(__dirname, adTypes.path));
+                if (!FS.existsSync(adTypes.path)) {
+                    return reject(new Error(`Fail to find file: ${adTypes.path}`));
+                }
+                injections.unshift(adTypes.path);
             }
             // Get base
             let base = '';

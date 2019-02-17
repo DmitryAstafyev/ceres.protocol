@@ -1,1 +1,0 @@
-{"version":3,"file":"simple.usage.js","sourceRoot":"","sources":["../../src/example/simple.usage.ts"],"names":[],"mappings":";;AAGA,qCAAqC;AAErC,MAAM,OAAO,GAAqB,IAAI,QAAQ,CAAC,OAAO,CAAC;IACnD,QAAQ,EAAE,aAAa;IACvB,OAAO,EAAE,IAAI,IAAI,EAAE;IACnB,OAAO,EAAE,mBAAmB;CAC/B,CAAC,CAAC;AAEH,OAAO,CAAC,SAAS,EAAE,CAAC;AAEpB,OAAO,CAAC,GAAG,CAAC,OAAO,CAAC,SAAS,EAAE,CAAC,CAAA"}

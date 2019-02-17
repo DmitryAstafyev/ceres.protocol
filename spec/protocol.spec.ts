@@ -4,7 +4,7 @@
 /// <reference path="../node_modules/@types/node/index.d.ts" />
 
 //./node_modules/.bin/jasmine-ts src/something.spec.ts
-
+import * as Path from 'path';
 import Logger from '../src/tools/tools.logger';
 import { Builder, Reader, Convertor } from '../src/index';
 import { AdvancedTypes } from './example/test.advanced.types';
@@ -12,7 +12,7 @@ import { AdvancedTypes } from './example/test.advanced.types';
 const TEST_SOURCE_PROTOCOL_FILE = './spec/example/protocol.json';
 const TEST_DEST_PROTOCOL_FILE = './spec/example/example.ts';
 const TEST_DEST_PROTOCOL_MODULE_REF = './example/example.ts';
-
+const TEST_ADVANCED_TYPES = Path.resolve(__dirname, '../spec/example/test.advanced.types.ts');
 describe('[Test][platform][protocol]', () => {
 
     it('[Reader]', (done: Function)=>{
@@ -44,7 +44,7 @@ describe('[Test][platform][protocol]', () => {
                 const convertor: Convertor = new Convertor();
                 convertor.convert(json, [], {
                     implementation: AdvancedTypes,
-                    path: '../spec/example/test.advanced.types.ts'
+                    path: TEST_ADVANCED_TYPES
                 }).then((protocol: string) => {
                     expect(typeof protocol).toBe('string');
                     return done();
@@ -68,7 +68,7 @@ describe('[Test][platform][protocol]', () => {
                 const convertor: Convertor = new Convertor();
                 convertor.convert(json, [], {
                     implementation: AdvancedTypes,
-                    path: '../spec/example/test.advanced.types.ts'
+                    path: TEST_ADVANCED_TYPES
                 }).then((protocol: string) => {
                     const builder: Builder = new Builder();
                     builder.write(TEST_DEST_PROTOCOL_FILE, protocol, true).then(() => {
@@ -98,7 +98,7 @@ describe('[Test][platform][protocol]', () => {
                 const convertor: Convertor = new Convertor();
                 convertor.convert(json, [], {
                     implementation: AdvancedTypes,
-                    path: '../spec/example/test.advanced.types.ts'
+                    path: TEST_ADVANCED_TYPES
                 }).then((protocol: string) => {
                     const builder: Builder = new Builder();
                     builder.write(TEST_DEST_PROTOCOL_FILE, protocol, true).then(() => {
