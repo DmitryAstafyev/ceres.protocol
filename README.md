@@ -723,7 +723,7 @@ Flags:
 
 # Network usage tips
 ## Multiple packets 
-It could be you will need to send not one single packet, but a few of them. If you will join ceres.protocol packets manually you will lost a possobility to decode it. But you can easy do it with protocol implementation.
+It could be you will need to send not one single packet, but a few of them. If you will join packets manually you will lose a possibility to decode it. But you can easily do it with protocol implementation.
 
 ```typescript
 import * as Protocol from './simple';
