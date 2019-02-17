@@ -30,11 +30,11 @@ Before generate your first protocol you should install ceres.protocol with `npm 
 
 Time to generate protocol. If you install ceres.protocol locally:
 ```
-./node_modules/.bin/ceres -s ./chat.message.json -o ./simple.ts -r
+./node_modules/.bin/ceres.protocol -s ./chat.message.json -o ./simple.ts -r
 ```
 And if ceres.protocol installed globably
 ```
-ceres -s ./chat.message.json -o ./simple.ts -r
+ceres.protocol -s ./chat.message.json -o ./simple.ts -r
 ```
 
 A few notes here:
@@ -284,28 +284,28 @@ class Entity_C {
 
 ## Primitive types
 Ceres.protocol supports next primitives types:
-Type | Value Range | Description | Size, bytes
---- | --- | --- | ---
-utf8String |  | string in UTF8 coding | x
-asciiString |  | simple ascii string | 1 symbol - 1 byte
-int8 | -128 to 127 | | 1
-int16 | -32768 to 32767 | | 2 
-int32 | -2147483648 to 2147483647 | | 4
-uint8 | 0 to 255 | | 1
-uint16 | 0 to 65535 | | 2
-uint32 | 0 to 4294967295 | | 4
-float32 | 1.2x10<sup>-38</sup> to 3.4x10<sup>38</sup> | | 4
-float64 | 5.0x10<sup>-324</sup> to 1.8x10<sup>308</sup> | | 8
-boolean | | | 1
+| Type | Value Range | Description | Size, bytes |
+| --- | --- | --- | --- |
+| utf8String |  | string in UTF8 coding | x |
+| asciiString |  | simple ascii string | 1 symbol - 1 byte |
+| int8 | -128 to 127 | | 1 |
+| int16 | -32768 to 32767 | | 2 | 
+| int32 | -2147483648 to 2147483647 | | 4 |
+| uint8 | 0 to 255 | | 1 |
+| uint16 | 0 to 65535 | | 2 |
+| uint32 | 0 to 4294967295 | | 4 |
+| float32 | 1.2x10<sup>-38</sup> to 3.4x10<sup>38</sup> | | 4 |
+| float64 | 5.0x10<sup>-324</sup> to 1.8x10<sup>308</sup> | | 8 |
+| boolean | | | 1 |
 
 ## Type aliases
 Ceres.protocol uses a few refs to primitive types, just to make JSON sources a little bit easy read.
-Alias (used in JSON description) | Actual primitive type 
---- | ---
-string | utf8String
-integer | int32
-float | float64
-byte | int8
+| Alias (used in JSON description) | Actual primitive type |
+| --- | --- |
+| string | utf8String |
+| integer | int32 |
+| float | float64 |
+| byte | int8 |
 
 ## Advanced types
 Advanced type incudes:
@@ -314,10 +314,10 @@ Advanced type incudes:
 - validator
 
 By default ceres.protocol include a few advanced types. 
-Alias | Primitive type | Description 
---- | --- | ---
-guid | asciiString | automatically generate unique GUID
-datetime | uint32 | Javascript Date type
+| Alias | Primitive type | Description  |
+| --- | --- | --- |
+| guid | asciiString | automatically generate unique GUID |
+| datetime | uint32 | Javascript Date type |
 
 Ceres.protocol allows eeasy add your own types. Let's do it with next example.
 
@@ -336,7 +336,7 @@ Let's make new sources file. Name it **protocol.advanced.json**
 Ok. We created simple class User, which includes **"firstname"**, **"lastname"** and **"email"**. But pay your attention to **"email"**. It has type "email". If you will try to generate now protocol 
 
 ```
-ceres -s ./advanced.json -o advanced.ts -r
+ceres.protocol -s ./advanced.json -o advanced.ts -r
 ```
 you will see an error:
 
