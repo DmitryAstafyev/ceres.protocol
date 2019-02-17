@@ -284,6 +284,7 @@ class Entity_C {
 
 ## Primitive types
 Ceres.protocol supports next primitives types:
+
 | Type | Value Range | Description | Size, bytes |
 | --- | --- | --- | --- |
 | utf8String |  | string in UTF8 coding | x |
@@ -300,12 +301,14 @@ Ceres.protocol supports next primitives types:
 
 ## Type aliases
 Ceres.protocol uses a few refs to primitive types, just to make JSON sources a little bit easy read.
+
 | Alias (used in JSON description) | Actual primitive type |
 | --- | --- |
 | string | utf8String |
 | integer | int32 |
 | float | float64 |
 | byte | int8 |
+
 
 ## Advanced types
 Advanced type incudes:
@@ -314,10 +317,12 @@ Advanced type incudes:
 - validator
 
 By default ceres.protocol include a few advanced types. 
+
 | Alias | Primitive type | Description  |
 | --- | --- | --- |
 | guid | asciiString | automatically generate unique GUID |
 | datetime | uint32 | Javascript Date type |
+
 
 Ceres.protocol allows eeasy add your own types. Let's do it with next example.
 
