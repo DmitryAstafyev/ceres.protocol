@@ -32,6 +32,7 @@ If you have almost any kind of communication between parts of your application (
   - [Primitive types](#primitive-types)
   - [Type aliases](#type-aliases)
   - [Advanced types](#advanced-types)
+  - [Enums](#enums)
   - [Nested sources (findin)](#nested-sources-findin)
 - [Encode / decode](#encode--decode)
   - [Encode](#encode)
@@ -525,6 +526,54 @@ User {
   lastname: 'Pitt',
   email: 'fake@email.com' }
 ```
+
+## Enums
+In many cases we should define a state of something as a string constant. Enum is a great thing to do it. Let's create a simple protocol description.
+
+```
+{
+    "Message": {
+        "clientId"  : "asciiString",
+        "guid?"     : "guid",
+        "Handshake": {
+            "allowed"   : "boolean",
+            "error?"    : "string",
+        }
+    },
+    "ConnectionError": {
+        "reason": "Reasons",
+        "message": "string",
+        "Reasons": ["FAIL_AUTH", "NO_TOKEN_FOUND", "NO_CLIENT_ID_FOUND", "NO_TOKEN_PROVIDED", "TOKEN_IS_WRONG"]
+    },
+    "version": "0.0.1"
+}
+```
+
+As you can see, we have "ConnectionError" entity, which has property "reason". Value of "reason" can be only one of defined in "Reasons". In typescript it looks like:
+
+```typescript
+enum Reasons {
+    FAIL_AUTH = 'FAIL_AUTH',
+    NO_TOKEN_FOUND = 'NO_TOKEN_FOUND',
+    NO_CLIENT_ID_FOUND = 'NO_CLIENT_ID_FOUND',
+    NO_TOKEN_PROVIDED = 'NO_TOKEN_PROVIDED',
+    TOKEN_IS_WRONG = 'TOKEN_IS_WRONG'
+}
+
+class ConnectionError {
+
+    public reason: Reasons;
+    public message: string;
+
+}
+```
+
+Ceres.protocol will check values during creating entity "ConnectionError" and prevent not valid value of property "reason". Also, it makes a life of developer much easier.
+
+![Example][example_1]
+
+[example_1]: https://github.com/DmitryAstafyev/ceres.protocol/blob/master/docs/assets/example_1.gif?raw=true "example"
+
 
 ## Nested sources (findin)
 In some cases to make code easy to read better to split JSON description into a few files. It's possible with ceres.protocol via very simple synax:

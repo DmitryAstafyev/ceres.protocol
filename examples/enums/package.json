@@ -1,0 +1,20 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ceres.protocol": "latest"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.8.16",
+    "@types/node": "^10.12.26",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3"
+  }
+}

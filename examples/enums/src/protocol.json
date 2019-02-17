@@ -1,0 +1,16 @@
+{
+    "Message": {
+        "clientId"  : "asciiString",
+        "guid?"     : "guid",
+        "Handshake": {
+            "allowed"   : "boolean",
+            "error?"    : "string",
+        }
+    },
+    "ConnectionError": {
+        "reason": "Reasons",
+        "message": "string",
+        "Reasons": ["FAIL_AUTH", "NO_TOKEN_FOUND", "NO_CLIENT_ID_FOUND", "NO_TOKEN_PROVIDED", "TOKEN_IS_WRONG"]
+    },
+    "version": "0.0.1"
+}
