@@ -1,9 +1,25 @@
 # Ceres Typescript protocol generator for network usage
 Generates protocol description (typescript) from JSON sources. Allows convert packages to binary data or simple JSON format.
 
+# What ceres.protocol does?
+If you have almost any kind of communication between parts of your application (solution) ceres.protocol could be intresting and useful because:
+- a developer can describe all messages/events of a system as an easily readable JSON format. It allows describe communication in one file (or several bound files) and generates protocol from it for all parts of a system (solution). No more pieces of data in different parts of the application - everything in one place.
+- for each message/event could be defined types of properties. Ceres.protocol will check types on fly and prevent any not valid messages/events.
+- according to the previous point, ceres.protocol prevents any errors/bugs, which comes from incorrect type or format of messages/events
+- developer doesn't need anymore to care about parsers of data - ceres.protocol will cares about it
+- ceres.protocol encodes packages into binary data - it will make the load on traffic much less
+
+# Benifits of ceres.protocol
+- the generated protocol doesn't need any additional libraries (even ceres.protocol library) to work. All developer need to do: generate and use.
+- ceres.protocol allows adding advanced types of data (to inject addition validation procedures)
+- ceres.protocol creates binary packages to safe traffic.
+- ceres.protocol validates data on all steps: generating data, encoding data and decoding. Such strict politic allows prevent appearing any incorrect messages in the communication process and allows developer "catch" it on generating step.
+
 # Table of content
 
 - [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
+- [What ceres.protocol does?](#what-ceresprotocol-does)
+- [Benifits of ceres.protocol](#benifits-of-ceresprotocol)
 - [Table of content](#table-of-content)
 - [Installation](#installation)
 - [Example of usage](#example-of-usage)
