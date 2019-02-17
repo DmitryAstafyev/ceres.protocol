@@ -1,6 +1,6 @@
 {
   "name": "ceres.protocol",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Network Protocol based JSON format. Coverting JSON description to TS classes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,7 +22,7 @@
     "typescript": "^3.3.3"
   },
   "bin": {
-    "ceres": "dist/protocol.cli.js"
+    "ceres": "node dist/protocol.cli.js"
   },
   "dependencies": {},
   "author": "Dmitry Astafyev (D.Astafyev@outlook.com)",
