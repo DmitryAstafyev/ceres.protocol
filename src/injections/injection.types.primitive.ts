@@ -180,6 +180,34 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         },
     } as IPrimitiveType<number>,
 
+    asciiString     : {
+        binaryType  : 'asciiString',
+        init        : '""',
+        parse       : (value: string) => value,
+        serialize   : (value: string) => value,
+        tsType      : 'string',
+        validate    : (value: string) => {
+            if (typeof value !== 'string') {
+                return false;
+            }
+            return true;
+        },
+    } as IPrimitiveType<string>,
+
+    utf8String     : {
+        binaryType  : 'utf8String',
+        init        : '""',
+        parse       : (value: string) => value,
+        serialize   : (value: string) => value,
+        tsType      : 'string',
+        validate    : (value: string) => {
+            if (typeof value !== 'string') {
+                return false;
+            }
+            return true;
+        },
+    } as IPrimitiveType<string>,
+
     string      : {
         binaryType  : 'utf8String',
         init        : '""',

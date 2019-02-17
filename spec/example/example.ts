@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Tue Feb 12 2019 01:20:25 GMT+0100 (CET))
+* This file generated automaticaly (Sun Feb 17 2019 01:17:19 GMT+0100 (CET))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
@@ -476,7 +476,7 @@ export namespace Protocol {
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	export const TypedEntitiesMap: {[key: string]: any} = {
 		"36550583": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: {
 				a: "string",
@@ -484,11 +484,11 @@ export namespace Protocol {
 			},
 		},
 		"59648854": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"60658336": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: "boolean",
 		},
@@ -500,55 +500,55 @@ export namespace Protocol {
 			a: "string",
 		},
 		"70D1C8A2": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"5B342A75": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"1D8E5E9C": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: "boolean",
 			d: "string",
 			e: "string",
 		},
 		"6A4CB50C": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"411DF73D": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"550547F2": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: "boolean",
 		},
 		"7E8304BE": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"35D910F1": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"26C80A90": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"4A9F03A0": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"3ED7382B": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"2FFB32C4": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: {
 				a: "string",
@@ -558,11 +558,11 @@ export namespace Protocol {
 			},
 		},
 		"7A8FB62E": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"15C342AF": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: {
 				a: "string",
@@ -579,17 +579,17 @@ export namespace Protocol {
 			},
 		},
 		"5A3337DF": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: "string",
 			d: "integer",
 		},
 		"40BAC922": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"3FAECA1": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: {
 				a: "string",
@@ -597,16 +597,16 @@ export namespace Protocol {
 			},
 		},
 		"783AF28F": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: "boolean",
 		},
 		"C96909B": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"B782B1A": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: {
 				a: "string",
@@ -614,11 +614,11 @@ export namespace Protocol {
 			},
 		},
 		"1A9B1BFC": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 		},
 		"6EDC0A13": {
-			a: "string",
+			a: "utf8String",
 			b: "guid",
 			c: "boolean",
 		},
@@ -717,95 +717,6 @@ export namespace Protocol {
 		},
 	};
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: injection.packager.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	// tslint:disable:no-namespace
-	// tslint:disable:max-classes-per-file
-	// tslint:disable:object-literal-sort-keys
-	
-	// declare var Json: any;
-	
-	export namespace Packager {
-	
-	    export function join(...items: any[]): string | Uint8Array | Error {
-	        if (items instanceof Array && items.length === 1 && items[0] instanceof Array) {
-	            items = items[0];
-	        }
-	        if (!(items instanceof Array) || items.length === 0) {
-	            return new Error(`No arguments provided to join`);
-	        }
-	        const strs: any[] = [];
-	        const bytes: number[] = [];
-	        let isBinary: boolean | undefined;
-	        try {
-	            items.forEach((item: any, i: number) => {
-	                if (item instanceof Uint8Array && (isBinary === undefined || isBinary === true)) {
-	                    isBinary = true;
-	                    if (i === 0) {
-	                        // Set type as array
-	                        bytes.push(Json.Scheme.Types.array);
-	                    }
-	                    // Set length of item
-	                    bytes.push(...Json.Impls.Uint32.toUint8(item.length));
-	                    // Put item
-	                    bytes.push(...item);
-	                } else if (typeof item === 'string' && (isBinary === undefined || isBinary === false)) {
-	                    isBinary = false;
-	                    strs.push(item);
-	                } else {
-	                    throw new Error(`Only strings or Uint8Array can be joined. Each array item should be same type.`);
-	                }
-	            });
-	            if (isBinary) {
-	                return new Uint8Array(bytes);
-	            }
-	        } catch (error) {
-	            return error;
-	        }
-	        return JSON.stringify(strs);
-	    }
-	
-	    export function split(source: string | Uint8Array): string[] | Uint8Array[] | Error {
-	        if (!isPackage(source)) {
-	            return new Error(`Source isn't a package of protocol data.`);
-	        }
-	        if (source instanceof Buffer) {
-	            source = new Uint8Array(source);
-	        }
-	        if (source instanceof Uint8Array) {
-	            let buffer = source.slice(1, source.length);
-	            const items: Uint8Array[] = [];
-	            do {
-	                const itemLength = Json.Impls.Uint32.fromUint8(buffer.slice(0, 4));
-	                items.push(buffer.slice(4, 4 + itemLength));
-	                buffer = buffer.slice(4 + itemLength, buffer.length);
-	            } while (buffer.length > 0);
-	            return items;
-	        } else {
-	            return JSON.parse(source) as string[];
-	        }
-	    }
-	
-	    export function isPackage(source: any): boolean {
-	        if (source instanceof Uint8Array) {
-	            return source[0] === Json.Scheme.Types.array;
-	        } else if (source instanceof Buffer) {
-	            const uint8array: Uint8Array = new Uint8Array(source);
-	            return uint8array.length > 0 ? (uint8array[0] === Json.Scheme.Types.array) : false;
-	        } else if (typeof source === 'string') {
-	            try {
-	                return JSON.parse(source) instanceof Array;
-	            } catch (error) {
-	                return false;
-	            }
-	        } else {
-	            return false;
-	        }
-	    }
-	
-	}
-	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.types.primitive.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -990,6 +901,34 @@ export namespace Protocol {
 	            return true;
 	        },
 	    } as IPrimitiveType<number>,
+	
+	    asciiString     : {
+	        binaryType  : 'asciiString',
+	        init        : '""',
+	        parse       : (value: string) => value,
+	        serialize   : (value: string) => value,
+	        tsType      : 'string',
+	        validate    : (value: string) => {
+	            if (typeof value !== 'string') {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<string>,
+	
+	    utf8String     : {
+	        binaryType  : 'utf8String',
+	        init        : '""',
+	        parse       : (value: string) => value,
+	        serialize   : (value: string) => value,
+	        tsType      : 'string',
+	        validate    : (value: string) => {
+	            if (typeof value !== 'string') {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<string>,
 	
 	    string      : {
 	        binaryType  : 'utf8String',
@@ -1481,7 +1420,6 @@ export namespace Protocol {
 	    }
 	    const result = _parse(json, target);
 	    if (result instanceof Array) {
-	        (global as any).__json = json;
 	        return new Error(`Cannot parse due errors:\n ${result.map((error: Error) => error.message).join('\n')}`);
 	    }
 	    return result;
@@ -1649,6 +1587,122 @@ export namespace Protocol {
 	
 	}
 	
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: injection.packager.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	// tslint:disable:no-namespace
+	// tslint:disable:max-classes-per-file
+	// tslint:disable:object-literal-sort-keys
+	
+	// declare var Json: any;
+	
+	export namespace Packager {
+	
+	    export function join(...items: any[]): string | Uint8Array | Error {
+	        if (items instanceof Array && items.length === 1 && items[0] instanceof Array) {
+	            items = items[0];
+	        }
+	        if (!(items instanceof Array) || items.length === 0) {
+	            return new Error(`No arguments provided to join`);
+	        }
+	        const strs: any[] = [];
+	        const bytes: number[] = [];
+	        let isBinary: boolean | undefined;
+	        try {
+	            items.forEach((item: any, i: number) => {
+	                if (item instanceof Uint8Array && (isBinary === undefined || isBinary === true)) {
+	                    isBinary = true;
+	                    if (i === 0) {
+	                        // Set type as array
+	                        bytes.push(Json.Scheme.Types.array);
+	                    }
+	                    // Set length of item
+	                    bytes.push(...Json.Impls.Uint32.toUint8(item.length));
+	                    // Put item
+	                    bytes.push(...item);
+	                } else if (typeof item === 'string' && (isBinary === undefined || isBinary === false)) {
+	                    isBinary = false;
+	                    strs.push(item);
+	                } else {
+	                    throw new Error(`Only strings or Uint8Array can be joined. Each array item should be same type.`);
+	                }
+	            });
+	            if (isBinary) {
+	                return new Uint8Array(bytes);
+	            }
+	        } catch (error) {
+	            return error;
+	        }
+	        return JSON.stringify(strs);
+	    }
+	
+	    export function split(source: string | Uint8Array): string[] | Uint8Array[] | Error {
+	        if (!isPackage(source)) {
+	            return new Error(`Source isn't a package of protocol data.`);
+	        }
+	        if (source instanceof ArrayBuffer) {
+	            source = new Uint8Array(source);
+	        }
+	        if (source instanceof Uint8Array) {
+	            let buffer = source.slice(1, source.length);
+	            const items: Uint8Array[] = [];
+	            do {
+	                const itemLength = Json.Impls.Uint32.fromUint8(buffer.slice(0, 4));
+	                items.push(buffer.slice(4, 4 + itemLength));
+	                buffer = buffer.slice(4 + itemLength, buffer.length);
+	            } while (buffer.length > 0);
+	            return items;
+	        } else {
+	            return JSON.parse(source) as string[];
+	        }
+	    }
+	
+	    export function isPackage(source: any): boolean {
+	        if (source instanceof Uint8Array) {
+	            return source[0] === Json.Scheme.Types.array;
+	        } else if (source instanceof ArrayBuffer) {
+	            const uint8array: Uint8Array = new Uint8Array(source);
+	            return uint8array.length > 0 ? (uint8array[0] === Json.Scheme.Types.array) : false;
+	        } else if (typeof source === 'string') {
+	            try {
+	                return JSON.parse(source) instanceof Array;
+	            } catch (error) {
+	                return false;
+	            }
+	        } else {
+	            return false;
+	        }
+	    }
+	
+	}
+	
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: test.advanced.types.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	export const AdvancedTypes: { [key:string]: any} = {
+	    byte: {
+	        binaryType  : 'uint8',
+	        init        : '-1',
+	        parse       : (value: number) => { return value; },
+	        serialize   : (value: number) => { return value; },
+	        tsType      : 'number',
+	        validate    : (value: number) => { 
+	            if (typeof value !== 'number'){
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)){
+	                return false;
+	            }
+	            if (value < 0 || value > 255) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    }
+	};
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.convertor.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -2231,33 +2285,6 @@ export namespace Protocol {
 	    }
 	}
 	
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: test.advanced.types.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	export const AdvancedTypes: { [key:string]: any} = {
-	    byte: {
-	        binaryType  : 'uint8',
-	        init        : '-1',
-	        parse       : (value: number) => { return value; },
-	        serialize   : (value: number) => { return value; },
-	        tsType      : 'number',
-	        validate    : (value: number) => { 
-	            if (typeof value !== 'number'){
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)){
-	                return false;
-	            }
-	            if (value < 0 || value > 255) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    }
-	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: map of references
@@ -2343,7 +2370,7 @@ function guid() {
 export class Message extends Protocol.Root {
 	static getDescription(): {[key: string]: Protocol.IProperty } {
 		return {
-			clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+			clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 			guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 		}
 	}
@@ -2379,7 +2406,7 @@ export namespace Message {
 	export class Handshake extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -2411,7 +2438,7 @@ export namespace Message {
 		export class Response extends Handshake {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					allowed: { name: "allowed", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 					reason: { name: "reason", value: Message.Handshake.Response.Reasons, type: Protocol.EEntityType.reference, optional: true }, 
@@ -2458,7 +2485,7 @@ export namespace Message {
 		export class Request extends Handshake {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
@@ -2491,7 +2518,7 @@ export namespace Message {
 	export class Reconnection extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -2523,7 +2550,7 @@ export namespace Message {
 		export class Response extends Reconnection {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					allowed: { name: "allowed", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
@@ -2560,7 +2587,7 @@ export namespace Message {
 		export class Request extends Reconnection {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
@@ -2593,7 +2620,7 @@ export namespace Message {
 	export class Hook extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -2629,7 +2656,7 @@ export namespace Message {
 		export class Request extends Hook {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
@@ -2660,7 +2687,7 @@ export namespace Message {
 		export class Response extends Hook {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
@@ -2693,7 +2720,7 @@ export namespace Message {
 	export class Pending extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -2725,7 +2752,7 @@ export namespace Message {
 		export class Response extends Pending {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					event: { name: "event", value: EventDefinition, type: Protocol.EEntityType.reference, optional: false }, 
 				}
@@ -2762,7 +2789,7 @@ export namespace Message {
 		export class Request extends Pending {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
@@ -2795,7 +2822,7 @@ export namespace Message {
 	export class Event extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -2827,7 +2854,7 @@ export namespace Message {
 		export class Request extends Event {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					event: { name: "event", value: EventDefinition, type: Protocol.EEntityType.reference, optional: false }, 
 					aliases: { name: "aliases", value: KeyValue, type: Protocol.EEntityType.repeated, optional: true }, 
@@ -2867,7 +2894,7 @@ export namespace Message {
 		export class Response extends Event {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					eventGUID: { name: "eventGUID", value: "string", type: Protocol.EEntityType.primitive, optional: true }, 
 					subscribers: { name: "subscribers", value: "integer", type: Protocol.EEntityType.primitive, optional: false }, 
@@ -2949,7 +2976,7 @@ export namespace Message {
 	export class Subscribe extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -2981,7 +3008,7 @@ export namespace Message {
 		export class Request extends Subscribe {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					subscription: { name: "subscription", value: Subscription, type: Protocol.EEntityType.reference, optional: false }, 
 				}
@@ -3015,7 +3042,7 @@ export namespace Message {
 		export class Response extends Subscribe {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
@@ -3054,7 +3081,7 @@ export namespace Message {
 	export class Unsubscribe extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -3086,7 +3113,7 @@ export namespace Message {
 		export class Request extends Unsubscribe {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					subscription: { name: "subscription", value: Subscription, type: Protocol.EEntityType.reference, optional: false }, 
 				}
@@ -3120,7 +3147,7 @@ export namespace Message {
 		export class Response extends Unsubscribe {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
@@ -3159,7 +3186,7 @@ export namespace Message {
 	export class UnsubscribeAll extends Message {
 		static getDescription(): {[key: string]: Protocol.IProperty } {
 			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
@@ -3191,7 +3218,7 @@ export namespace Message {
 		export class Request extends UnsubscribeAll {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					subscription: { name: "subscription", value: Subscription, type: Protocol.EEntityType.reference, optional: false }, 
 				}
@@ -3225,7 +3252,7 @@ export namespace Message {
 		export class Response extends UnsubscribeAll {
 			static getDescription(): {[key: string]: Protocol.IProperty } {
 				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					clientId: { name: "clientId", value: "utf8String", type: Protocol.EEntityType.primitive, optional: false }, 
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}

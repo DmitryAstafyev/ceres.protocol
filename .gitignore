@@ -65,3 +65,5 @@ dist/**/*
 
 # mac
 .DS_Store
+__docs
+TODO

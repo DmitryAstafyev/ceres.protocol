@@ -5,7 +5,7 @@
     "Data:findin": "protocol.data.json",
     /* Description of message section */
     "Message": {
-        "clientId"  : "string",
+        "clientId"  : "asciiString",
         "guid?"     : "guid",
         "Handshake": {
             "Response": {
