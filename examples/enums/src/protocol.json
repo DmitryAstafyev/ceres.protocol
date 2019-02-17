@@ -4,7 +4,7 @@
         "guid?"     : "guid",
         "Handshake": {
             "allowed"   : "boolean",
-            "error?"    : "string",
+            "error?"    : "string"
         }
     },
     "ConnectionError": {
