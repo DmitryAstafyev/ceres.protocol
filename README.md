@@ -41,8 +41,9 @@ A few notes here:
 
 That's all! We can start use out generated protocol. Create "chat.message.ts" and try it:
 
-[gif]: https://github.com/DmitryAstafyev/ceres.protocol/raw/master/docs/assets/example_0.gif
+![Example][example]
 
+[example]: https://github.com/DmitryAstafyev/ceres.protocol/blob/master/docs/assets/example_0.gif?raw=true "example"
 
 Benifits here:
 - you have tips with a description of properties, which has class "Message". 
