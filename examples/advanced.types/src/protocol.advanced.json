@@ -1,0 +1,8 @@
+{
+    "User": {
+        "firstname": "string",
+        "lastname": "string",
+        "email": "email"
+    },
+    "version":"0.0.1"
+}
