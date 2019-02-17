@@ -456,6 +456,9 @@ export function validateParams(params: any, classRef: any): Error[] {
                 if (typeOf(params[prop]) !== type.tsType) {
                     errors.push(new Error(`Property "${prop}" has wrong format. Expected: "${type.tsType}".`));
                 }
+                if (!type.validate(params[prop])) {
+                    errors.push(new Error(`Property "${prop}" has wrong value; validation was failed with value "${params[prop]}".`));
+                }
                 break;
             case EEntityType.reference:
                 if (typeof desc.value === 'function') {

@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Sun Feb 17 2019 17:08:11 GMT+0100 (CET))
+* This file generated automaticaly (Sun Feb 17 2019 17:39:28 GMT+0100 (CET))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
@@ -717,6 +717,95 @@ export namespace Protocol {
 		},
 	};
 
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: injection.packager.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	// tslint:disable:no-namespace
+	// tslint:disable:max-classes-per-file
+	// tslint:disable:object-literal-sort-keys
+	
+	// declare var Json: any;
+	
+	export namespace Packager {
+	
+	    export function join(...items: any[]): string | Uint8Array | Error {
+	        if (items instanceof Array && items.length === 1 && items[0] instanceof Array) {
+	            items = items[0];
+	        }
+	        if (!(items instanceof Array) || items.length === 0) {
+	            return new Error(`No arguments provided to join`);
+	        }
+	        const strs: any[] = [];
+	        const bytes: number[] = [];
+	        let isBinary: boolean | undefined;
+	        try {
+	            items.forEach((item: any, i: number) => {
+	                if (item instanceof Uint8Array && (isBinary === undefined || isBinary === true)) {
+	                    isBinary = true;
+	                    if (i === 0) {
+	                        // Set type as array
+	                        bytes.push(Json.Scheme.Types.array);
+	                    }
+	                    // Set length of item
+	                    bytes.push(...Json.Impls.Uint32.toUint8(item.length));
+	                    // Put item
+	                    bytes.push(...item);
+	                } else if (typeof item === 'string' && (isBinary === undefined || isBinary === false)) {
+	                    isBinary = false;
+	                    strs.push(item);
+	                } else {
+	                    throw new Error(`Only strings or Uint8Array can be joined. Each array item should be same type.`);
+	                }
+	            });
+	            if (isBinary) {
+	                return new Uint8Array(bytes);
+	            }
+	        } catch (error) {
+	            return error;
+	        }
+	        return JSON.stringify(strs);
+	    }
+	
+	    export function split(source: string | Uint8Array): string[] | Uint8Array[] | Error {
+	        if (!isPackage(source)) {
+	            return new Error(`Source isn't a package of protocol data.`);
+	        }
+	        if (source instanceof ArrayBuffer) {
+	            source = new Uint8Array(source);
+	        }
+	        if (source instanceof Uint8Array) {
+	            let buffer = source.slice(1, source.length);
+	            const items: Uint8Array[] = [];
+	            do {
+	                const itemLength = Json.Impls.Uint32.fromUint8(buffer.slice(0, 4));
+	                items.push(buffer.slice(4, 4 + itemLength));
+	                buffer = buffer.slice(4 + itemLength, buffer.length);
+	            } while (buffer.length > 0);
+	            return items;
+	        } else {
+	            return JSON.parse(source) as string[];
+	        }
+	    }
+	
+	    export function isPackage(source: any): boolean {
+	        if (source instanceof Uint8Array) {
+	            return source[0] === Json.Scheme.Types.array;
+	        } else if (source instanceof ArrayBuffer) {
+	            const uint8array: Uint8Array = new Uint8Array(source);
+	            return uint8array.length > 0 ? (uint8array[0] === Json.Scheme.Types.array) : false;
+	        } else if (typeof source === 'string') {
+	            try {
+	                return JSON.parse(source) instanceof Array;
+	            } catch (error) {
+	                return false;
+	            }
+	        } else {
+	            return false;
+	        }
+	    }
+	
+	}
+	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.convertor.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -1639,94 +1728,32 @@ export namespace Protocol {
 	};
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: injection.packager.ts
+	* Injection: test.advanced.types.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	// tslint:disable:no-namespace
-	// tslint:disable:max-classes-per-file
-	// tslint:disable:object-literal-sort-keys
-	
-	// declare var Json: any;
-	
-	export namespace Packager {
-	
-	    export function join(...items: any[]): string | Uint8Array | Error {
-	        if (items instanceof Array && items.length === 1 && items[0] instanceof Array) {
-	            items = items[0];
-	        }
-	        if (!(items instanceof Array) || items.length === 0) {
-	            return new Error(`No arguments provided to join`);
-	        }
-	        const strs: any[] = [];
-	        const bytes: number[] = [];
-	        let isBinary: boolean | undefined;
-	        try {
-	            items.forEach((item: any, i: number) => {
-	                if (item instanceof Uint8Array && (isBinary === undefined || isBinary === true)) {
-	                    isBinary = true;
-	                    if (i === 0) {
-	                        // Set type as array
-	                        bytes.push(Json.Scheme.Types.array);
-	                    }
-	                    // Set length of item
-	                    bytes.push(...Json.Impls.Uint32.toUint8(item.length));
-	                    // Put item
-	                    bytes.push(...item);
-	                } else if (typeof item === 'string' && (isBinary === undefined || isBinary === false)) {
-	                    isBinary = false;
-	                    strs.push(item);
-	                } else {
-	                    throw new Error(`Only strings or Uint8Array can be joined. Each array item should be same type.`);
-	                }
-	            });
-	            if (isBinary) {
-	                return new Uint8Array(bytes);
-	            }
-	        } catch (error) {
-	            return error;
-	        }
-	        return JSON.stringify(strs);
-	    }
-	
-	    export function split(source: string | Uint8Array): string[] | Uint8Array[] | Error {
-	        if (!isPackage(source)) {
-	            return new Error(`Source isn't a package of protocol data.`);
-	        }
-	        if (source instanceof ArrayBuffer) {
-	            source = new Uint8Array(source);
-	        }
-	        if (source instanceof Uint8Array) {
-	            let buffer = source.slice(1, source.length);
-	            const items: Uint8Array[] = [];
-	            do {
-	                const itemLength = Json.Impls.Uint32.fromUint8(buffer.slice(0, 4));
-	                items.push(buffer.slice(4, 4 + itemLength));
-	                buffer = buffer.slice(4 + itemLength, buffer.length);
-	            } while (buffer.length > 0);
-	            return items;
-	        } else {
-	            return JSON.parse(source) as string[];
-	        }
-	    }
-	
-	    export function isPackage(source: any): boolean {
-	        if (source instanceof Uint8Array) {
-	            return source[0] === Json.Scheme.Types.array;
-	        } else if (source instanceof ArrayBuffer) {
-	            const uint8array: Uint8Array = new Uint8Array(source);
-	            return uint8array.length > 0 ? (uint8array[0] === Json.Scheme.Types.array) : false;
-	        } else if (typeof source === 'string') {
-	            try {
-	                return JSON.parse(source) instanceof Array;
-	            } catch (error) {
+	export const AdvancedTypes: { [key:string]: any} = {
+	    byte: {
+	        binaryType  : 'uint8',
+	        init        : '-1',
+	        parse       : (value: number) => { return value; },
+	        serialize   : (value: number) => { return value; },
+	        tsType      : 'number',
+	        validate    : (value: number) => { 
+	            if (typeof value !== 'number'){
 	                return false;
 	            }
-	        } else {
-	            return false;
-	        }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)){
+	                return false;
+	            }
+	            if (value < 0 || value > 255) {
+	                return false;
+	            }
+	            return true;
+	        },
 	    }
-	
-	}
-	
+	};
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.root.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -2188,6 +2215,9 @@ export namespace Protocol {
 	                if (typeOf(params[prop]) !== type.tsType) {
 	                    errors.push(new Error(`Property "${prop}" has wrong format. Expected: "${type.tsType}".`));
 	                }
+	                if (!type.validate(params[prop])) {
+	                    errors.push(new Error(`Property "${prop}" has wrong value; validation was failed with value "${params[prop]}".`));
+	                }
 	                break;
 	            case EEntityType.reference:
 	                if (typeof desc.value === 'function') {
@@ -2258,33 +2288,6 @@ export namespace Protocol {
 	
 	}
 	
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: test.advanced.types.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	export const AdvancedTypes: { [key:string]: any} = {
-	    byte: {
-	        binaryType  : 'uint8',
-	        init        : '-1',
-	        parse       : (value: number) => { return value; },
-	        serialize   : (value: number) => { return value; },
-	        tsType      : 'number',
-	        validate    : (value: number) => { 
-	            if (typeof value !== 'number'){
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)){
-	                return false;
-	            }
-	            if (value < 0 || value > 255) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    }
-	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: map of references

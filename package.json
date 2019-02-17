@@ -1,6 +1,6 @@
 {
   "name": "ceres.protocol",
-  "version": "1.0.13",
+  "version": "1.0.15",
   "description": "Network Protocol based JSON format. Coverting JSON description to TS classes",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
