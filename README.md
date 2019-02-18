@@ -33,6 +33,7 @@ If you have almost any kind of communication between parts of your application (
   - [Type aliases](#type-aliases)
   - [Advanced types](#advanced-types)
   - [Enums](#enums)
+  - [Classes / objects as type](#classes--objects-as-type)
   - [Nested sources (findin)](#nested-sources-findin)
 - [Encode / decode](#encode--decode)
   - [Encode](#encode)
@@ -574,6 +575,54 @@ Ceres.protocol will check values during creating entity "ConnectionError" and pr
 
 [example_1]: https://github.com/DmitryAstafyev/ceres.protocol/blob/master/docs/assets/example_1.gif?raw=true "example"
 
+## Classes / objects as type
+In many cases we would like to have a way to define some kind of object (class). Take a look on next example.
+
+```
+{
+    "Message": {
+        "clientId"  : "asciiString",
+        "guid?"     : "guid",
+        "Handshake" : {
+            "allowed"   : "boolean",
+            "error?"    : "ConnectionError"
+        },
+        "GetUsersList"  : {
+            "users"     : "Array<User>"
+        }
+    },
+    "User": {
+        "firstname" : "string",
+        "lastname"  : "string",
+        "email"     : "asciiString"
+    },
+    "ConnectionError": {
+        "reason"    : "Reasons",
+        "message"   : "string",
+        "Reasons"   : ["FAIL_AUTH", "NO_TOKEN_FOUND", "NO_CLIENT_ID_FOUND", "NO_TOKEN_PROVIDED", "TOKEN_IS_WRONG"]
+    },
+    "version": "0.0.1"
+}
+```
+
+Message "**GetUsersList**" should delivery list of users. Each user is an instance of class **User**. Everything you need - define object "**User**" on same level (where you are using it or on upper level to get possibility to use it with other messages).
+
+Try to generate protocol with this sources and you will get protocol implementation:
+
+```typescript
+import * as Protocol from './protocol';
+
+const user: Protocol.User = new Protocol.User({
+    firstname: 'Brad',
+    lastname: 'Pitt',
+    email: 'fake@email.com'
+});
+
+const usersListResponse: Protocol.Message.GetUsersList = new Protocol.Message.GetUsersList({
+    users: [user],
+    clientId: ''
+});
+```
 
 ## Nested sources (findin)
 In some cases to make code easy to read better to split JSON description into a few files. It's possible with ceres.protocol via very simple synax:
