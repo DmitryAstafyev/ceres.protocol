@@ -525,6 +525,16 @@ export function convertTypesToStandard(target: {[key: string]: any}): {[key: str
     return converted;
 }
 
+export function isInstanceOf(signature: string, target: any): boolean {
+    if (typeof target !== 'object' || target === null) {
+        return false;
+    }
+    if (typeof target.getSignature !== 'function') {
+        return false;
+    }
+    return target.getSignature() === signature;
+}
+
 export class Root {
 
 }

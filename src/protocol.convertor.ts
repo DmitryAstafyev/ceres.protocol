@@ -490,8 +490,8 @@ export class Convertor {
         const chain: string = this._getClassChain(entity);
         const signature: string = Tools.hash(`${this._version}:${chain}`, true);
         output += this._getDescriptionEntity(entity, deep + 1);
-        output += `${exttab}static __signature: string = "${signature}";\n`;
-        output += `${exttab}static getSignature(): string {\n`;
+        output += `${exttab}public static __signature: string = "${signature}";\n`;
+        output += `${exttab}public static getSignature(): string {\n`;
         output += `${exttab}\treturn ${entity.name}.__signature;\n`;
         output += `${exttab}}\n`;
         output += `${exttab}public __signature: string = ${entity.name}.__signature;\n`;
@@ -499,12 +499,16 @@ export class Convertor {
         output += `${exttab}\treturn this.__signature;\n`;
         output += `${exttab}}\n`;
         // Define extractor
-        output += `${exttab}static parse(str: string | object): Protocol.TTypes | Error {\n`;
+        output += `${exttab}public static parse(str: string | object): Protocol.TTypes | Error {\n`;
         output += `${exttab}\treturn Protocol.parse(str, ${entity.name});\n`;
         output += `${exttab}}\n`;
         // Define stringify
-        output += `${exttab}public stringify(): string {\n`;
-        output += `${exttab}\treturn Protocol.stringify(this, ${entity.name}) as string;\n`;
+        output += `${exttab}public stringify(): string | Uint8Array | Error {\n`;
+        output += `${exttab}\treturn Protocol.stringify(this, ${entity.name});\n`;
+        output += `${exttab}}\n`;
+        // Define signature checker
+        output += `${exttab}public static instanceOf(target: any): boolean {\n`;
+        output += `${exttab}\treturn Protocol.isInstanceOf(${entity.name}.__signature, target);\n`;
         output += `${exttab}}\n`;
         // Save signature
         if (this._map[signature] !== void 0) {

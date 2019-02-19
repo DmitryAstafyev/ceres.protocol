@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Mon Feb 18 2019 17:38:43 GMT+0100 (CET))
+* This file generated automaticaly (Tue Feb 19 2019 15:39:02 GMT+0100 (CET))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
@@ -807,6 +807,345 @@ export namespace Protocol {
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: injection.types.primitive.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	
+	export interface IPrimitiveType<T> {
+	    tsType: string;
+	    binaryType: string;
+	    init: string;
+	    parse: (value: string | number | T) => T;
+	    serialize: (value: T) => string | number | boolean | T;
+	    validate: (value: string | number | T) => boolean;
+	    implementation?: () => {};
+	}
+	
+	export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
+	
+	    uint8     : {
+	        binaryType  : 'uint8',
+	        init        : '0',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            if (value < 0) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    uint16     : {
+	        binaryType  : 'uint16',
+	        init        : '0',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            if (value < 0) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    uint32     : {
+	        binaryType  : 'uint32',
+	        init        : '0',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            if (value < 0) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    int8     : {
+	        binaryType  : 'int8',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    int16     : {
+	        binaryType  : 'int16',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    int32     : {
+	        binaryType  : 'int32',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    float32     : {
+	        binaryType  : 'float32',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    float64     : {
+	        binaryType  : 'float64',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    asciiString     : {
+	        binaryType  : 'asciiString',
+	        init        : '""',
+	        parse       : (value: string) => value,
+	        serialize   : (value: string) => value,
+	        tsType      : 'string',
+	        validate    : (value: string) => {
+	            if (typeof value !== 'string') {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<string>,
+	
+	    utf8String     : {
+	        binaryType  : 'utf8String',
+	        init        : '""',
+	        parse       : (value: string) => value,
+	        serialize   : (value: string) => value,
+	        tsType      : 'string',
+	        validate    : (value: string) => {
+	            if (typeof value !== 'string') {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<string>,
+	
+	    string      : {
+	        binaryType  : 'utf8String',
+	        init        : '""',
+	        parse       : (value: string) => value,
+	        serialize   : (value: string) => value,
+	        tsType      : 'string',
+	        validate    : (value: string) => {
+	            if (typeof value !== 'string') {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<string>,
+	
+	    integer     : {
+	        binaryType  : 'int32',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    float     : {
+	        binaryType  : 'float64',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    boolean     : {
+	        binaryType  : 'boolean',
+	        init        : 'false',
+	        parse       : (value: boolean) => value,
+	        serialize   : (value: boolean) => value,
+	        tsType      : 'boolean',
+	        validate    : (value: boolean) => {
+	            if (typeof value !== 'boolean') {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<boolean>,
+	
+	    datetime    : {
+	        binaryType  : 'float64',
+	        init        : 'new Date()',
+	        parse       : (value: number) => {
+	            return new Date(value);
+	        },
+	        serialize   : (value: Date) => value.getTime(),
+	        tsType      : 'Date',
+	        validate    : (value: number | Date) => {
+	            if (value instanceof Date) {
+	                return true;
+	            }
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            const date = new Date(value);
+	            if (!(date instanceof Date)) {
+	                return false;
+	            }
+	            if (date.toString().toLowerCase().indexOf('invalid date') !== -1) {
+	                return false;
+	            }
+	            return !isNaN(date.getTime());
+	        },
+	    } as IPrimitiveType<Date>,
+	
+	    guid     : {
+	        binaryType  : 'asciiString',
+	        implementation  : function guid() {
+	            const lengths = [4, 4, 4, 8];
+	            let resultGuid = '';
+	            for (let i = lengths.length - 1; i >= 0; i -= 1) {
+	                resultGuid += (Math.round(Math.random() * Math.random() * Math.pow(10, lengths[i] * 2))
+	                            .toString(16)
+	                            .substr(0, lengths[i])
+	                            .toUpperCase() + '-');
+	            }
+	            resultGuid += ((new Date()).getTime() * (Math.random() * 100))
+	                        .toString(16)
+	                        .substr(0, 12)
+	                        .toUpperCase();
+	            return resultGuid;
+	        },
+	        init            : 'guid()',
+	        parse           : (value: string) => value,
+	        serialize       : (value: string) => value,
+	        tsType          : 'string',
+	        validate        : (value: string) => {
+	            return typeof value === 'string' ? (value.trim() !== '' ? true : false) : false;
+	        },
+	
+	    } as IPrimitiveType<string>,
+	
+	};
+	
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.root.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	// tslint:disable:max-classes-per-file
@@ -1336,348 +1675,19 @@ export namespace Protocol {
 	    return converted;
 	}
 	
+	export function isInstanceOf(signature: string, target: any): boolean {
+	    if (typeof target !== 'object' || target === null) {
+	        return false;
+	    }
+	    if (typeof target.getSignature !== 'function') {
+	        return false;
+	    }
+	    return target.getSignature() === signature;
+	}
+	
 	export class Root {
 	
 	}
-	
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: injection.types.primitive.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	
-	export interface IPrimitiveType<T> {
-	    tsType: string;
-	    binaryType: string;
-	    init: string;
-	    parse: (value: string | number | T) => T;
-	    serialize: (value: T) => string | number | boolean | T;
-	    validate: (value: string | number | T) => boolean;
-	    implementation?: () => {};
-	}
-	
-	export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
-	
-	    uint8     : {
-	        binaryType  : 'uint8',
-	        init        : '0',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            if (value < 0) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    uint16     : {
-	        binaryType  : 'uint16',
-	        init        : '0',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            if (value < 0) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    uint32     : {
-	        binaryType  : 'uint32',
-	        init        : '0',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            if (value < 0) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    int8     : {
-	        binaryType  : 'int8',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    int16     : {
-	        binaryType  : 'int16',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    int32     : {
-	        binaryType  : 'int32',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    float32     : {
-	        binaryType  : 'float32',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    float64     : {
-	        binaryType  : 'float64',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    asciiString     : {
-	        binaryType  : 'asciiString',
-	        init        : '""',
-	        parse       : (value: string) => value,
-	        serialize   : (value: string) => value,
-	        tsType      : 'string',
-	        validate    : (value: string) => {
-	            if (typeof value !== 'string') {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<string>,
-	
-	    utf8String     : {
-	        binaryType  : 'utf8String',
-	        init        : '""',
-	        parse       : (value: string) => value,
-	        serialize   : (value: string) => value,
-	        tsType      : 'string',
-	        validate    : (value: string) => {
-	            if (typeof value !== 'string') {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<string>,
-	
-	    string      : {
-	        binaryType  : 'utf8String',
-	        init        : '""',
-	        parse       : (value: string) => value,
-	        serialize   : (value: string) => value,
-	        tsType      : 'string',
-	        validate    : (value: string) => {
-	            if (typeof value !== 'string') {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<string>,
-	
-	    integer     : {
-	        binaryType  : 'int32',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    float     : {
-	        binaryType  : 'float64',
-	        init        : '-1',
-	        parse       : (value: number) => value,
-	        serialize   : (value: number) => value,
-	        tsType      : 'number',
-	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<number>,
-	
-	    boolean     : {
-	        binaryType  : 'boolean',
-	        init        : 'false',
-	        parse       : (value: boolean) => value,
-	        serialize   : (value: boolean) => value,
-	        tsType      : 'boolean',
-	        validate    : (value: boolean) => {
-	            if (typeof value !== 'boolean') {
-	                return false;
-	            }
-	            return true;
-	        },
-	    } as IPrimitiveType<boolean>,
-	
-	    datetime    : {
-	        binaryType  : 'float64',
-	        init        : 'new Date()',
-	        parse       : (value: number) => {
-	            return new Date(value);
-	        },
-	        serialize   : (value: Date) => value.getTime(),
-	        tsType      : 'Date',
-	        validate    : (value: number | Date) => {
-	            if (value instanceof Date) {
-	                return true;
-	            }
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            const date = new Date(value);
-	            if (!(date instanceof Date)) {
-	                return false;
-	            }
-	            if (date.toString().toLowerCase().indexOf('invalid date') !== -1) {
-	                return false;
-	            }
-	            return !isNaN(date.getTime());
-	        },
-	    } as IPrimitiveType<Date>,
-	
-	    guid     : {
-	        binaryType  : 'asciiString',
-	        implementation  : function guid() {
-	            const lengths = [4, 4, 4, 8];
-	            let resultGuid = '';
-	            for (let i = lengths.length - 1; i >= 0; i -= 1) {
-	                resultGuid += (Math.round(Math.random() * Math.random() * Math.pow(10, lengths[i] * 2))
-	                            .toString(16)
-	                            .substr(0, lengths[i])
-	                            .toUpperCase() + '-');
-	            }
-	            resultGuid += ((new Date()).getTime() * (Math.random() * 100))
-	                        .toString(16)
-	                        .substr(0, 12)
-	                        .toUpperCase();
-	            return resultGuid;
-	        },
-	        init            : 'guid()',
-	        parse           : (value: string) => value,
-	        serialize       : (value: string) => value,
-	        tsType          : 'string',
-	        validate        : (value: string) => {
-	            return typeof value === 'string' ? (value.trim() !== '' ? true : false) : false;
-	        },
-	
-	    } as IPrimitiveType<string>,
-	
-	};
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.convertor.ts
@@ -2377,19 +2387,22 @@ export class Message extends Protocol.Root {
 			guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 		}
 	}
-	static __signature: string = "70D1C8A2";
-	static getSignature(): string {
+	public static __signature: string = "70D1C8A2";
+	public static getSignature(): string {
 		return Message.__signature;
 	}
 	public __signature: string = Message.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, Message);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, Message) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, Message);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(Message.__signature, target);
 	}
 	public clientId: string = "";
 	public guid?: string = guid();
@@ -2413,19 +2426,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "5B342A75";
-		static getSignature(): string {
+		public static __signature: string = "5B342A75";
+		public static getSignature(): string {
 			return Handshake.__signature;
 		}
 		public __signature: string = Handshake.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Handshake);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Handshake) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Handshake);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Handshake.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -2448,19 +2464,22 @@ export namespace Message {
 					error: { name: "error", value: "string", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "1D8E5E9C";
-			static getSignature(): string {
+			public static __signature: string = "1D8E5E9C";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public allowed: boolean = false;
 			public reason?: Message.Handshake.Response.Reasons;
@@ -2492,19 +2511,22 @@ export namespace Message {
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "6A4CB50C";
-			static getSignature(): string {
+			public static __signature: string = "6A4CB50C";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 
 			constructor(args: { clientId: string, guid?: string }) {
@@ -2525,19 +2547,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "411DF73D";
-		static getSignature(): string {
+		public static __signature: string = "411DF73D";
+		public static getSignature(): string {
 			return Reconnection.__signature;
 		}
 		public __signature: string = Reconnection.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Reconnection);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Reconnection) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Reconnection);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Reconnection.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -2558,19 +2583,22 @@ export namespace Message {
 					allowed: { name: "allowed", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "550547F2";
-			static getSignature(): string {
+			public static __signature: string = "550547F2";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public allowed: boolean = false;
 
@@ -2594,19 +2622,22 @@ export namespace Message {
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "7E8304BE";
-			static getSignature(): string {
+			public static __signature: string = "7E8304BE";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 
 			constructor(args: { clientId: string, guid?: string }) {
@@ -2627,19 +2658,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "35D910F1";
-		static getSignature(): string {
+		public static __signature: string = "35D910F1";
+		public static getSignature(): string {
 			return Hook.__signature;
 		}
 		public __signature: string = Hook.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Hook);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Hook) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Hook);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Hook.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -2663,19 +2697,22 @@ export namespace Message {
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "26C80A90";
-			static getSignature(): string {
+			public static __signature: string = "26C80A90";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 
 			constructor(args: { clientId: string, guid?: string }) {
@@ -2694,19 +2731,22 @@ export namespace Message {
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "4A9F03A0";
-			static getSignature(): string {
+			public static __signature: string = "4A9F03A0";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 
 			constructor(args: { clientId: string, guid?: string }) {
@@ -2727,19 +2767,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "3ED7382B";
-		static getSignature(): string {
+		public static __signature: string = "3ED7382B";
+		public static getSignature(): string {
 			return Pending.__signature;
 		}
 		public __signature: string = Pending.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Pending);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Pending) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Pending);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Pending.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -2760,19 +2803,22 @@ export namespace Message {
 					event: { name: "event", value: EventDefinition, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "2FFB32C4";
-			static getSignature(): string {
+			public static __signature: string = "2FFB32C4";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public event: EventDefinition;
 
@@ -2796,19 +2842,22 @@ export namespace Message {
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "59648854";
-			static getSignature(): string {
+			public static __signature: string = "59648854";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 
 			constructor(args: { clientId: string, guid?: string }) {
@@ -2829,19 +2878,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "7A8FB62E";
-		static getSignature(): string {
+		public static __signature: string = "7A8FB62E";
+		public static getSignature(): string {
 			return Event.__signature;
 		}
 		public __signature: string = Event.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Event);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Event) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Event);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Event.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -2864,19 +2916,22 @@ export namespace Message {
 					options: { name: "options", value: Message.Event.Options, type: Protocol.EEntityType.reference, optional: true }, 
 				}
 			}
-			static __signature: string = "15C342AF";
-			static getSignature(): string {
+			public static __signature: string = "15C342AF";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 			public event: EventDefinition;
 			public aliases?: Array<KeyValue> = [];
@@ -2903,19 +2958,22 @@ export namespace Message {
 					subscribers: { name: "subscribers", value: "integer", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "5A3337DF";
-			static getSignature(): string {
+			public static __signature: string = "5A3337DF";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public eventGUID?: string = "";
 			public subscribers: number = -1;
@@ -2940,19 +2998,22 @@ export namespace Message {
 					scope: { name: "scope", value: Message.Event.Options.Scope, type: Protocol.EEntityType.reference, optional: true }, 
 				}
 			}
-			static __signature: string = "76052942";
-			static getSignature(): string {
+			public static __signature: string = "76052942";
+			public static getSignature(): string {
 				return Options.__signature;
 			}
 			public __signature: string = Options.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Options);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Options) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Options);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Options.__signature, target);
 			}
 			public scope?: Message.Event.Options.Scope;
 
@@ -2983,19 +3044,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "40BAC922";
-		static getSignature(): string {
+		public static __signature: string = "40BAC922";
+		public static getSignature(): string {
 			return Subscribe.__signature;
 		}
 		public __signature: string = Subscribe.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Subscribe);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Subscribe) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Subscribe);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Subscribe.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -3016,19 +3080,22 @@ export namespace Message {
 					subscription: { name: "subscription", value: Subscription, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "3FAECA1";
-			static getSignature(): string {
+			public static __signature: string = "3FAECA1";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 			public subscription: Subscription;
 
@@ -3050,19 +3117,22 @@ export namespace Message {
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "783AF28F";
-			static getSignature(): string {
+			public static __signature: string = "783AF28F";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public status: boolean = false;
 
@@ -3088,19 +3158,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "C96909B";
-		static getSignature(): string {
+		public static __signature: string = "C96909B";
+		public static getSignature(): string {
 			return Unsubscribe.__signature;
 		}
 		public __signature: string = Unsubscribe.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Unsubscribe);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Unsubscribe) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Unsubscribe);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Unsubscribe.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -3121,19 +3194,22 @@ export namespace Message {
 					subscription: { name: "subscription", value: Subscription, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "B782B1A";
-			static getSignature(): string {
+			public static __signature: string = "B782B1A";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 			public subscription: Subscription;
 
@@ -3155,19 +3231,22 @@ export namespace Message {
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "60658336";
-			static getSignature(): string {
+			public static __signature: string = "60658336";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public status: boolean = false;
 
@@ -3193,19 +3272,22 @@ export namespace Message {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "1A9B1BFC";
-		static getSignature(): string {
+		public static __signature: string = "1A9B1BFC";
+		public static getSignature(): string {
 			return UnsubscribeAll.__signature;
 		}
 		public __signature: string = UnsubscribeAll.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, UnsubscribeAll);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, UnsubscribeAll) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, UnsubscribeAll);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(UnsubscribeAll.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -3226,19 +3308,22 @@ export namespace Message {
 					subscription: { name: "subscription", value: Subscription, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "36550583";
-			static getSignature(): string {
+			public static __signature: string = "36550583";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 			public subscription: Subscription;
 
@@ -3260,19 +3345,22 @@ export namespace Message {
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "6EDC0A13";
-			static getSignature(): string {
+			public static __signature: string = "6EDC0A13";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public status: boolean = false;
 
@@ -3301,19 +3389,22 @@ export class EventDefinition extends Protocol.Root {
 			eventGUID: { name: "eventGUID", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 		}
 	}
-	static __signature: string = "282376D8";
-	static getSignature(): string {
+	public static __signature: string = "282376D8";
+	public static getSignature(): string {
 		return EventDefinition.__signature;
 	}
 	public __signature: string = EventDefinition.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, EventDefinition);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, EventDefinition) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, EventDefinition);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(EventDefinition.__signature, target);
 	}
 	public protocol: string = "";
 	public event: string = "";
@@ -3340,19 +3431,22 @@ export class Subscription extends Protocol.Root {
 			event: { name: "event", value: "string", type: Protocol.EEntityType.primitive, optional: true }, 
 		}
 	}
-	static __signature: string = "2DEBB962";
-	static getSignature(): string {
+	public static __signature: string = "2DEBB962";
+	public static getSignature(): string {
 		return Subscription.__signature;
 	}
 	public __signature: string = Subscription.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, Subscription);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, Subscription) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, Subscription);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(Subscription.__signature, target);
 	}
 	public protocol: string = "";
 	public event?: string = "";
@@ -3375,19 +3469,22 @@ export class ConnectionError extends Protocol.Root {
 			message: { name: "message", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
 		}
 	}
-	static __signature: string = "583DFB65";
-	static getSignature(): string {
+	public static __signature: string = "583DFB65";
+	public static getSignature(): string {
 		return ConnectionError.__signature;
 	}
 	public __signature: string = ConnectionError.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, ConnectionError);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, ConnectionError) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, ConnectionError);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(ConnectionError.__signature, target);
 	}
 	public reason: Array<ConnectionError.Reasons> = [];
 	public message: string = "";
@@ -3419,19 +3516,22 @@ export class Disconnect extends Protocol.Root {
 			message: { name: "message", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
 		}
 	}
-	static __signature: string = "71280621";
-	static getSignature(): string {
+	public static __signature: string = "71280621";
+	public static getSignature(): string {
 		return Disconnect.__signature;
 	}
 	public __signature: string = Disconnect.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, Disconnect);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, Disconnect) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, Disconnect);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(Disconnect.__signature, target);
 	}
 	public reason: Disconnect.Reasons;
 	public message: string = "";
@@ -3459,19 +3559,22 @@ export class BinaryData extends Protocol.Root {
 			sequence: { name: "sequence", value: "uint8", type: Protocol.EEntityType.primitive, optional: false }, 
 		}
 	}
-	static __signature: string = "1D0934D0";
-	static getSignature(): string {
+	public static __signature: string = "1D0934D0";
+	public static getSignature(): string {
 		return BinaryData.__signature;
 	}
 	public __signature: string = BinaryData.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, BinaryData);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, BinaryData) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, BinaryData);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(BinaryData.__signature, target);
 	}
 	public bytes: Array<number> = [];
 	public sequence: number = 0;
@@ -3494,19 +3597,22 @@ export class KeyValue extends Protocol.Root {
 			value: { name: "value", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
 		}
 	}
-	static __signature: string = "1DB68EE9";
-	static getSignature(): string {
+	public static __signature: string = "1DB68EE9";
+	public static getSignature(): string {
 		return KeyValue.__signature;
 	}
 	public __signature: string = KeyValue.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, KeyValue);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, KeyValue) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, KeyValue);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(KeyValue.__signature, target);
 	}
 	public key: string = "";
 	public value: string = "";
@@ -3529,19 +3635,22 @@ export class State extends Protocol.Root {
 			guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 		}
 	}
-	static __signature: string = "30CF0814";
-	static getSignature(): string {
+	public static __signature: string = "30CF0814";
+	public static getSignature(): string {
 		return State.__signature;
 	}
 	public __signature: string = State.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, State);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, State) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, State);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(State.__signature, target);
 	}
 	public clientId: string = "";
 	public guid?: string = guid();
@@ -3565,19 +3674,22 @@ export namespace State {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "5CF12234";
-		static getSignature(): string {
+		public static __signature: string = "5CF12234";
+		public static getSignature(): string {
 			return Get.__signature;
 		}
 		public __signature: string = Get.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Get);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Get) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Get);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Get.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -3598,19 +3710,22 @@ export namespace State {
 					state: { name: "state", value: State.ServerState, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "6A027D25";
-			static getSignature(): string {
+			public static __signature: string = "6A027D25";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public state: State.ServerState;
 
@@ -3631,19 +3746,22 @@ export namespace State {
 					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 				}
 			}
-			static __signature: string = "5F9348B5";
-			static getSignature(): string {
+			public static __signature: string = "5F9348B5";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 
 			constructor(args: { clientId: string, guid?: string }) {
@@ -3664,19 +3782,22 @@ export namespace State {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "5CF14F40";
-		static getSignature(): string {
+		public static __signature: string = "5CF14F40";
+		public static getSignature(): string {
 			return Set.__signature;
 		}
 		public __signature: string = Set.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Set);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Set) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Set);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Set.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -3697,19 +3818,22 @@ export namespace State {
 					state: { name: "state", value: State.ServerState, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "5A4BA9C1";
-			static getSignature(): string {
+			public static __signature: string = "5A4BA9C1";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 			public state: State.ServerState;
 
@@ -3731,19 +3855,22 @@ export namespace State {
 					status: { name: "status", value: "boolean", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "DAEBCB1";
-			static getSignature(): string {
+			public static __signature: string = "DAEBCB1";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public status: boolean = false;
 
@@ -3767,19 +3894,22 @@ export namespace State {
 				status: { name: "status", value: State.ServerState.Status, type: Protocol.EEntityType.reference, optional: false }, 
 			}
 		}
-		static __signature: string = "6AB58BEC";
-		static getSignature(): string {
+		public static __signature: string = "6AB58BEC";
+		public static getSignature(): string {
 			return ServerState.__signature;
 		}
 		public __signature: string = ServerState.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, ServerState);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, ServerState) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, ServerState);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(ServerState.__signature, target);
 		}
 		public clients: number = -1;
 		public started: Date = new Date();
@@ -3811,19 +3941,22 @@ export class Data extends Protocol.Root {
 			guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 		}
 	}
-	static __signature: string = "3B689B11";
-	static getSignature(): string {
+	public static __signature: string = "3B689B11";
+	public static getSignature(): string {
 		return Data.__signature;
 	}
 	public __signature: string = Data.__signature;
 	public getSignature(): string {
 		return this.__signature;
 	}
-	static parse(str: string | object): Protocol.TTypes | Error {
+	public static parse(str: string | object): Protocol.TTypes | Error {
 		return Protocol.parse(str, Data);
 	}
-	public stringify(): string {
-		return Protocol.stringify(this, Data) as string;
+	public stringify(): string | Uint8Array | Error {
+		return Protocol.stringify(this, Data);
+	}
+	public static instanceOf(target: any): boolean {
+		return Protocol.isInstanceOf(Data.__signature, target);
 	}
 	public clientId: string = "";
 	public guid?: string = guid();
@@ -3847,19 +3980,22 @@ export namespace Data {
 				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
 			}
 		}
-		static __signature: string = "5CEC0A00";
-		static getSignature(): string {
+		public static __signature: string = "5CEC0A00";
+		public static getSignature(): string {
 			return Write.__signature;
 		}
 		public __signature: string = Write.__signature;
 		public getSignature(): string {
 			return this.__signature;
 		}
-		static parse(str: string | object): Protocol.TTypes | Error {
+		public static parse(str: string | object): Protocol.TTypes | Error {
 			return Protocol.parse(str, Write);
 		}
-		public stringify(): string {
-			return Protocol.stringify(this, Write) as string;
+		public stringify(): string | Uint8Array | Error {
+			return Protocol.stringify(this, Write);
+		}
+		public static instanceOf(target: any): boolean {
+			return Protocol.isInstanceOf(Write.__signature, target);
 		}
 
 		constructor(args: { clientId: string, guid?: string }) {
@@ -3880,19 +4016,22 @@ export namespace Data {
 					binary: { name: "binary", value: "byte", type: Protocol.EEntityType.repeated, optional: false }, 
 				}
 			}
-			static __signature: string = "53C05B7F";
-			static getSignature(): string {
+			public static __signature: string = "53C05B7F";
+			public static getSignature(): string {
 				return Request.__signature;
 			}
 			public __signature: string = Request.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Request);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Request) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Request);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Request.__signature, target);
 			}
 			public binary: Array<number> = [];
 
@@ -3914,19 +4053,22 @@ export namespace Data {
 					status: { name: "status", value: Data.Write.Status, type: Protocol.EEntityType.reference, optional: false }, 
 				}
 			}
-			static __signature: string = "21235F71";
-			static getSignature(): string {
+			public static __signature: string = "21235F71";
+			public static getSignature(): string {
 				return Response.__signature;
 			}
 			public __signature: string = Response.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Response);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Response) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Response);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Response.__signature, target);
 			}
 			public status: Data.Write.Status;
 
@@ -3948,19 +4090,22 @@ export namespace Data {
 					finished: { name: "finished", value: "datetime", type: Protocol.EEntityType.primitive, optional: false }, 
 				}
 			}
-			static __signature: string = "62E617C0";
-			static getSignature(): string {
+			public static __signature: string = "62E617C0";
+			public static getSignature(): string {
 				return Status.__signature;
 			}
 			public __signature: string = Status.__signature;
 			public getSignature(): string {
 				return this.__signature;
 			}
-			static parse(str: string | object): Protocol.TTypes | Error {
+			public static parse(str: string | object): Protocol.TTypes | Error {
 				return Protocol.parse(str, Status);
 			}
-			public stringify(): string {
-				return Protocol.stringify(this, Status) as string;
+			public stringify(): string | Uint8Array | Error {
+				return Protocol.stringify(this, Status);
+			}
+			public static instanceOf(target: any): boolean {
+				return Protocol.isInstanceOf(Status.__signature, target);
 			}
 			public bytes: number = -1;
 			public started: Date = new Date();

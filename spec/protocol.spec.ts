@@ -115,7 +115,7 @@ describe('[Test][platform][protocol]', () => {
                                     clientId: 'xxx-xxx-xxxx',
                                     binary: [0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1]
                                 });
-                                expect(DataWriteRequest instanceof proto.Data.Write.Request).toBe(true);
+                                expect(proto.Data.Write.Request.instanceOf(DataWriteRequest)).toBe(true);
                                 console.log(`DataWriteRequest created.`);
                                 let strDataWriteRequest: string | Uint8Array= DataWriteRequest.stringify();
                                 expect(strDataWriteRequest instanceof Uint8Array).toBe(true);
