@@ -1,5 +1,6 @@
 declare type TTypes = any;
 export declare type TIncomeData = string | object | ArrayBuffer | number[] | Uint8Array;
+export declare type TStringifyOutput = string | Uint8Array;
 export declare class ProtocolState {
     private _debug;
     debug(value: boolean): void;
@@ -36,7 +37,7 @@ export declare function getTypes(): {
 };
 export declare function getJSONFromStr(str: string): {} | Error;
 export declare function getJSONFromIncomeData(income: TIncomeData): {} | Error;
-export declare function stringify(target: any, classRef: any): string | Uint8Array | Error;
+export declare function stringify(target: any, classRef: any): TStringifyOutput | Error;
 export declare function parse(source: TIncomeData, target?: any): TTypes | Error;
 export declare function parseFrom(source: TIncomeData, protocols: any | any[]): any;
 export declare function typeOf(smth: any): string;

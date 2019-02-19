@@ -210,7 +210,7 @@ class Convertor {
         output += 'export const isPackage = Protocol.Packager.isPackage;\n';
         output += 'export const getSignature = Protocol.getSignature;\n';
         output += 'export interface IClass { getSignature: () => string; parse: (str: string | object) => any; }\n';
-        output += 'export interface IImplementation { getSignature: () => string; stringify: () => string | Uint8Array; }\n';
+        output += 'export interface IImplementation { getSignature: () => string; stringify: () => Protocol.TStringifyOutput; }\n';
         return output;
     }
     _getTypes() {
@@ -467,7 +467,7 @@ class Convertor {
         output += `${exttab}\treturn Protocol.parse(str, ${entity.name});\n`;
         output += `${exttab}}\n`;
         // Define stringify
-        output += `${exttab}public stringify(): string | Uint8Array | Error {\n`;
+        output += `${exttab}public stringify(): Protocol.TStringifyOutput | Error {\n`;
         output += `${exttab}\treturn Protocol.stringify(this, ${entity.name});\n`;
         output += `${exttab}}\n`;
         // Define signature checker

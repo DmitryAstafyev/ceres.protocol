@@ -14,6 +14,8 @@ declare type TTypes = any;
 
 export type TIncomeData = string | object | ArrayBuffer | number[] | Uint8Array;
 
+export type TStringifyOutput = string | Uint8Array;
+
 export class ProtocolState {
 
     private _debug: boolean = false;
@@ -340,7 +342,7 @@ export function getJSONFromIncomeData(income: TIncomeData): {} | Error {
     }
 }
 
-export function stringify(target: any, classRef: any): string | Uint8Array | Error {
+export function stringify(target: any, classRef: any): TStringifyOutput | Error {
     const result = _stringify(target, classRef);
     if (result instanceof Array) {
         return new Error(`Cannot stringify due errors:\n ${result.map((error: Error) => error.message).join('\n')}`);
