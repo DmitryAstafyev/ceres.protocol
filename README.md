@@ -18,10 +18,6 @@ If you have almost any kind of communication between parts of your application (
 
 # Table of content
 
-- [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
-- [What ceres.protocol does?](#what-ceresprotocol-does)
-- [Benifits of ceres.protocol](#benifits-of-ceresprotocol)
-- [Table of content](#table-of-content)
 - [Installation](#installation)
 - [Example of usage](#example-of-usage)
 - [Documentation](#documentation)
@@ -623,6 +619,67 @@ const usersListResponse: Protocol.Message.GetUsersList = new Protocol.Message.Ge
     clientId: ''
 });
 ```
+
+## Usage "instanceof"
+In most cases **instanceof** will show you expected result.
+
+```typescript
+import * as Protocol from './simple';
+
+const message: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'some message here'
+});
+
+// Convert message to binary
+const bytes: Uint8Array | string = message.stringify();
+//Decode message from bytes to instance
+const decodedMessage: Protocol.TProtocolTypes | Error = Protocol.parse(bytes);
+
+console.log(decodedMessage instanceof Protocol.Message); // true
+
+if (decodedMessage instanceof Protocol.Message) {
+    // instanceof works as expected
+    console.log('Message was gotten');
+}
+```
+
+But if you create NPM module (just as example), which also include implementation of your protocol (not as **peerDependency**, but as simple **dependency**), **instanceof** will not work anymore. 
+
+```typescript
+// We get protocol from application sources
+import * as Protocol from './simple';
+// We get SAME protocol from "external" module
+import { LibProtocol } from 'some_npm_module';
+
+const message: Protocol.Message = new Protocol.Message({
+    clientId: 'xxx-xxx-xxx',
+    created: new Date(),
+    message: 'some message here'
+});
+
+// Convert message to binary
+const bytes: Uint8Array | string = message.stringify();
+
+// NOTE: we are decoding message using protocol from "external" module
+const decodedMessage: LibProtocol.TProtocolTypes | Error = LibProtocol.parse(bytes);
+
+console.log(decodedMessage instanceof Protocol.Message); // false
+console.log(decodedMessage instanceof LibProtocol.Message); // true
+```
+
+Both protocols (**Protocol** and **LibProtocol**) are same, but in scope of javascript - not. To prevent possible issues you can use static method **instanceOf**. This method is available with all classes of protocol implementation. Let's see on same example:
+
+```typescript
+// ... cut ...
+
+const decodedMessage: LibProtocol.TProtocolTypes | Error = LibProtocol.parse(bytes);
+
+console.log(Protocol.Message.instanceOf(decodedMessage));       // true
+console.log(LibProtocol.Message.instanceOf(decodedMessage));    // true
+```
+Now everything is correct.
 
 ## Nested sources (findin)
 In some cases to make code easy to read better to split JSON description into a few files. It's possible with ceres.protocol via very simple synax:
