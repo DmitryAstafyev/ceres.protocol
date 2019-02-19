@@ -526,6 +526,16 @@ function convertTypesToStandard(target) {
     return converted;
 }
 exports.convertTypesToStandard = convertTypesToStandard;
+function isInstanceOf(signature, target) {
+    if (typeof target !== 'object' || target === null) {
+        return false;
+    }
+    if (typeof target.getSignature !== 'function') {
+        return false;
+    }
+    return target.getSignature() === signature;
+}
+exports.isInstanceOf = isInstanceOf;
 class Root {
 }
 exports.Root = Root;

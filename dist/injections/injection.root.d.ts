@@ -46,6 +46,7 @@ export declare function convertTypesToStandard(target: {
 }): {
     [key: string]: any;
 };
+export declare function isInstanceOf(signature: string, target: any): boolean;
 export declare class Root {
 }
 export {};
