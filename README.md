@@ -18,6 +18,10 @@ If you have almost any kind of communication between parts of your application (
 
 # Table of content
 
+- [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
+- [What ceres.protocol does?](#what-ceresprotocol-does)
+- [Benifits of ceres.protocol](#benifits-of-ceresprotocol)
+- [Table of content](#table-of-content)
 - [Installation](#installation)
 - [Example of usage](#example-of-usage)
 - [Documentation](#documentation)
@@ -30,6 +34,7 @@ If you have almost any kind of communication between parts of your application (
   - [Advanced types](#advanced-types)
   - [Enums](#enums)
   - [Classes / objects as type](#classes--objects-as-type)
+  - [Usage "instanceof"](#usage-%22instanceof%22)
   - [Nested sources (findin)](#nested-sources-findin)
 - [Encode / decode](#encode--decode)
   - [Encode](#encode)
