@@ -210,7 +210,7 @@ class Convertor {
         output += 'export const isPackage = Protocol.Packager.isPackage;\n';
         output += 'export const getSignature = Protocol.getSignature;\n';
         output += 'export interface IClass { getSignature: () => string; parse: (str: string | object) => any; }\n';
-        output += 'export interface IImplementation { getSignature: () => string; stringify: () => Protocol.TStringifyOutput; }\n';
+        output += 'export interface IImplementation { getSignature: () => string; stringify: () => Protocol.TStringifyOutput | Error; }\n';
         return output;
     }
     _getTypes() {
