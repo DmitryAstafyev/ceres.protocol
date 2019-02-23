@@ -18,10 +18,6 @@ If you have almost any kind of communication between parts of your application (
 
 # Table of content
 
-- [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
-- [What ceres.protocol does?](#what-ceresprotocol-does)
-- [Benifits of ceres.protocol](#benifits-of-ceresprotocol)
-- [Table of content](#table-of-content)
 - [Installation](#installation)
 - [Example of usage](#example-of-usage)
 - [Documentation](#documentation)
