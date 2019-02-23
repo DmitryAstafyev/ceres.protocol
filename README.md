@@ -236,11 +236,21 @@ Ceres.protocol as sources file uses a simple JSON format. Each property can be:
         "email": "string"               /* primitive {string} value */
     },
     /* Definition on enum */
-    "ChatMessageType": ["public", "prrivate"]
+    "ChatMessageType": ["public", "private"]
 }
 ```
 
 > Note: ceres.protocol supports commends `/* your comment here */`. 
+
+| Type | Available values | Description / Rules | Usage / Definition in JSON scheme |
+| --- | --- | --- | --- |
+| **Primitive type** | utf8String;<br/>asciiString;<br/>int8;<br/>int16;<br/>int32;<br/>uint8;<br/>uint16;<br/>uint32;<br/>float32;<br/>float64;<br/>boolean | All data of protocol will be converted into primitive type only. It's basic types, which are used for encode/decode operations.<br/><br/>Name of primitive type **always** starts from lowercase.| ```{ "name_of_prop": "type" }```<br/>for example:<br/>```{ "nickname": "asciiString" }```<br/>Using in array:<br/>```{ "bytes": "Array<uint8>" }```|
+|**Alias to primitive type** | datetime<br/>string<br/>integer<br/>float<br/>byte | This is just a reference to primitive type. Aliases used just to make JSON scheme easy to read.<br/><br/>Name of alias type **always** starts from lowercase.| ```{ "name_of_prop": "type" }```<br/>for example:<br/>```{ "nickname": "datetime" }```<br/>Using in array:<br/>```{ "bytes": "Array<byte>" }```|
+| **Class** | All defined in JSON scheme | Each object in JSON scheme is a class on protocol level. <br/><br/>Name of class type **always** starts from **uppercase**.| ```{ "Name_of_class_from_UPPERCASE": { ... } }```<br/>for example:<br/>```{ "User": { "name": "string", "age": "int8" } }```<br/>Using in array:<br/>```{ "users": "Array<User>" }```|
+| **Enum** | All defined in JSON scheme | Enums are used to list in protocol available values of some property. Protocol automatically validates values and throw exception if value isn't correct. <br/><br/>Name of enum type **always** starts from **uppercase**.<br/><br/>Diffrence between class and enum is: **class** - is a object; **enum** - is array of values. <br/><br/> | ```{ "Name_of_enum_from_UPPERCASE": string[] }```<br/>for example:<br/>```{ "ErrorsCodes": ["FAIL_CONNECTION", "FAIL_LOGIN", "USER_NOT_FOUND"] }```<br/>Using in array:<br/>```{ "errors": "Array<ErrorsCodes>" }```|
+
+> **Note**. To define class or enum you should start name of property from **UPPERCASE**.
+> **Note**. To define an array you should use key-word `Array<type>` from **UPPERCASE**.
 
 ### Optional properties
 
