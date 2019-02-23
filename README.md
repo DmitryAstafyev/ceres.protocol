@@ -540,6 +540,9 @@ User {
 ```
 
 ## Enums
+
+> **Note**. To define class or enum you should start name of property from **UPPERCASE**.
+
 In many cases we should define a state of something as a string constant. Enum is a great thing to do it. Let's create a simple protocol description.
 
 ```
@@ -587,6 +590,9 @@ Ceres.protocol will check values during creating entity "ConnectionError" and pr
 [example_1]: https://github.com/DmitryAstafyev/ceres.protocol/blob/master/docs/assets/example_1.gif?raw=true "example"
 
 ## Classes / objects as type
+
+> **Note**. To define class or enum you should start name of property from **UPPERCASE**.
+
 In many cases we would like to have a way to define some kind of object (class). Take a look on next example.
 
 ```
