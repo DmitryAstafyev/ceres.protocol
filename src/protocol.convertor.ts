@@ -491,25 +491,17 @@ export class Convertor {
         const signature: string = Tools.hash(`${this._version}:${chain}`, true);
         output += this._getDescriptionEntity(entity, deep + 1);
         output += `${exttab}public static __signature: string = "${signature}";\n`;
-        output += `${exttab}public static getSignature(): string {\n`;
-        output += `${exttab}\treturn ${entity.name}.__signature;\n`;
-        output += `${exttab}}\n`;
+        output += `${exttab}public static getSignature(): string { return ${entity.name}.__signature; }\n`;
+        output += `${exttab}public static getProtocol(): any { return Protocol; }\n`;
         output += `${exttab}public __signature: string = ${entity.name}.__signature;\n`;
-        output += `${exttab}public getSignature(): string {\n`;
-        output += `${exttab}\treturn this.__signature;\n`;
-        output += `${exttab}}\n`;
+        output += `${exttab}public getSignature(): string { return this.__signature; }\n`;
+        output += `${exttab}public getProtocol(): any { return Protocol; }\n`;
         // Define extractor
-        output += `${exttab}public static parse(str: string | object): Protocol.TTypes | Error {\n`;
-        output += `${exttab}\treturn Protocol.parse(str, ${entity.name});\n`;
-        output += `${exttab}}\n`;
+        output += `${exttab}public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, ${entity.name}); }\n`;
         // Define stringify
-        output += `${exttab}public stringify(): Protocol.TStringifyOutput | Error {\n`;
-        output += `${exttab}\treturn Protocol.stringify(this, ${entity.name});\n`;
-        output += `${exttab}}\n`;
+        output += `${exttab}public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, ${entity.name}); }\n`;
         // Define signature checker
-        output += `${exttab}public static instanceOf(target: any): boolean {\n`;
-        output += `${exttab}\treturn Protocol.isInstanceOf(${entity.name}.__signature, target);\n`;
-        output += `${exttab}}\n`;
+        output += `${exttab}public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(${entity.name}.__signature, target); }\n`;
         // Save signature
         if (this._map[signature] !== void 0) {
             throw new Error(this._logger.error(`Signature (${signature}) for "${entity.name}" already exsist. Cannot continue converting.`));
