@@ -18,6 +18,10 @@ If you have almost any kind of communication between parts of your application (
 
 # Table of content
 
+- [Ceres Typescript protocol generator for network usage](#ceres-typescript-protocol-generator-for-network-usage)
+- [What ceres.protocol does?](#what-ceresprotocol-does)
+- [Benifits of ceres.protocol](#benifits-of-ceresprotocol)
+- [Table of content](#table-of-content)
 - [Installation](#installation)
 - [Example of usage](#example-of-usage)
 - [Documentation](#documentation)
@@ -72,10 +76,10 @@ Let's create a simple chat message entity. Create file "chat.message.json" and p
 
 As you can see this is a simple JSON format. A few notes:
 - simbol "?" in field "guid?" means the same as in TypeScript - this property can be defined or can be postponed. 
-- left side - naa me of property; right - a type of property. For example "clientId" should be a "string".
+- left side - name of property; right - a type of property. For example "clientId" should be a "string".
 - Ceres.Protocol supports custom types. For example, you can see the type "guid". This is string with unique value like "XXX-xxx-xxx-xxx". 
 
-Before generate your first protocol you should install ceres.protocol with `npm install ceres.protocol --save-dev` or `npm install ceeres.protocol -g` if you want to have it global.
+Before generate your first protocol you should install ceres.protocol with `npm install ceres.protocol --save-dev` or `npm install ceres.protocol -g` if you want to have it global.
 
 > You never will need ceres.protocol library in producation, generated protocol files already has everything to work. So, install ceres.protocol globally or use npm flag `--save-dev`
 
