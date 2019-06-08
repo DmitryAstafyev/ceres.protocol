@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 "use strict";
 /* tslint:disable:no-console */
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -12,6 +11,8 @@ const COMMANDS = {
     output: 'output',
     replace: 'replace',
     source: 'source',
+    advanced: 'advanced',
+    advancedCom: 'advancedCom'
 };
 const ARGUMENTS = {
     [COMMANDS.output]: {
@@ -24,6 +25,18 @@ const ARGUMENTS = {
         args: ['-s', '--source', '--src'],
         description: 'Definition of input file. Expected format is JSON',
         errors: { [ERRORS.noParameter]: 'Key "-s" (--source, --src) expected file name after.', [ERRORS.doubleParameter]: 'Key "-s" (--source, --src) can be defined twice.' },
+        hasParameter: true,
+    },
+    [COMMANDS.advanced]: {
+        args: ['-a', '--advanced', '--adv'],
+        description: 'Path to TS file with declaration of advanced types',
+        errors: { [ERRORS.noParameter]: 'Key "-a" (--advanced, --adv) expected file name after.', [ERRORS.doubleParameter]: 'Key "-a" (--advanced, --adv) can be defined twice.' },
+        hasParameter: true,
+    },
+    [COMMANDS.advancedCom]: {
+        args: ['-ac', '--advanced-compiled', '--adv-comp'],
+        description: 'Path to complited JS file of TS file with declaration of advanced types',
+        errors: { [ERRORS.noParameter]: 'Key "-ac" (--advanced-compiled, --adv-comp) expected file name after.', [ERRORS.doubleParameter]: 'Key "-ac" (--advanced-compiled, --adv-comp) can be defined twice.' },
         hasParameter: true,
     },
     [COMMANDS.replace]: {
@@ -112,14 +125,18 @@ if (process.argv instanceof Array) {
                 OUTPUTS.help();
             }
             else if (Object.keys(commands).indexOf(COMMANDS.source) !== -1 && Object.keys(commands).indexOf(COMMANDS.output) !== -1) {
+                if (commands[COMMANDS.advanced] !== undefined || commands[COMMANDS.advancedCom] !== undefined) {
+                    if (commands[COMMANDS.advanced] === undefined || commands[COMMANDS.advancedCom] === undefined) {
+                        console.log(`Keys -a and -ac can be used only together.`);
+                        process.exit(1);
+                    }
+                }
                 try {
                     const builder = new protocol_builder_1.Builder();
-                    builder.build(commands[COMMANDS.source], commands[COMMANDS.output], Object.keys(commands).indexOf(COMMANDS.replace) !== -1 ? true : false)
-                        .then(() => {
+                    builder.build(commands[COMMANDS.source], commands[COMMANDS.output], Object.keys(commands).indexOf(COMMANDS.replace) !== -1 ? true : false, commands[COMMANDS.advanced], commands[COMMANDS.advancedCom]).then(() => {
                         const finished = (new Date()).getTime();
                         console.log(`File "${commands[COMMANDS.output]}" generated for ${((finished - started) / 1000).toFixed(2)} s.`);
-                    })
-                        .catch((e) => {
+                    }).catch((e) => {
                         console.log(e.message);
                     });
                 }

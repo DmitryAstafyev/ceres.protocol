@@ -96,6 +96,11 @@ A few notes here:
 - flag `-s` or `--source` next after you should define path to JSON source file
 - flag `-o` or `--output` next after you should define path and name of TypeScript output file
 - flag `-r` or `--replace` tells ceres.protocol to overwrite output-file if it exists.
+- flag `-a` or `--advanced` path to TS (TypeScript) file with definitions of advanced types.
+- flag `-ac` or `--advanced-compiled` path to compiled JS file of TS (TypeScript) file with definitions of advanced types
+
+> Note: keys `-a` and `-ac` can be used only together. 
+
 
 That's all! We can start use out generated protocol. Create "chat.message.ts" and try it:
 
