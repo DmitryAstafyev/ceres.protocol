@@ -1,7 +1,10 @@
+#!/usr/bin/env node
 "use strict";
 /* tslint:disable:no-console */
 Object.defineProperty(exports, "__esModule", { value: true });
 const protocol_builder_1 = require("./protocol.builder");
+const fs = require("fs");
+const path = require("path");
 const ERRORS = {
     doubleParameter: 'doubleParameter',
     noParameter: 'noParameter',
@@ -52,6 +55,21 @@ const ARGUMENTS = {
         hasParameter: false,
     },
 };
+const CHECK_PATHS = [
+    COMMANDS.source,
+    COMMANDS.advanced,
+    COMMANDS.advancedCom
+];
+function getValidPath(file) {
+    const fullfile = path.resolve(process.cwd(), file);
+    if (fs.existsSync(fullfile)) {
+        return fullfile;
+    }
+    if (fs.existsSync(file)) {
+        return file;
+    }
+    return undefined;
+}
 function isItArgument(smth) {
     let result = false;
     Object.keys(ARGUMENTS).forEach((command) => {
@@ -130,6 +148,22 @@ if (process.argv instanceof Array) {
                         console.log(`Keys -a and -ac can be used only together.`);
                         process.exit(1);
                     }
+                }
+                let errors = [];
+                CHECK_PATHS.forEach((key) => {
+                    if (commands[key] === undefined) {
+                        return;
+                    }
+                    const filename = getValidPath(commands[key]);
+                    if (filename === undefined) {
+                        errors.push(`File ${commands[key]} isn't found.`);
+                        return;
+                    }
+                    commands[key] = filename;
+                });
+                if (errors.length > 0) {
+                    console.log(errors.join('\n'));
+                    process.exit(2);
                 }
                 try {
                     const builder = new protocol_builder_1.Builder();

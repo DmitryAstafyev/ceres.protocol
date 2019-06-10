@@ -1,6 +1,9 @@
 /* tslint:disable:no-console */
 
 import { Builder } from './protocol.builder';
+import * as fs from 'fs';
+import * as path from 'path';
+import { setFlagsFromString } from 'v8';
 
 type TArgumentDescription = { description: string, hasParameter: boolean, args: string[], errors: {[key: string]: string}};
 
@@ -56,6 +59,23 @@ const ARGUMENTS: {[key: string]: TArgumentDescription } = {
         hasParameter: false,
     },
 };
+
+const CHECK_PATHS = [
+    COMMANDS.source,
+    COMMANDS.advanced,
+    COMMANDS.advancedCom
+];
+
+function getValidPath(file: string): undefined | string {
+    const fullfile = path.resolve(process.cwd(), file);
+    if (fs.existsSync(fullfile)) {
+        return fullfile;
+    }
+    if (fs.existsSync(file)) {
+        return file;
+    }
+    return undefined;
+}
 
 function isItArgument(smth: string): boolean {
     let result = false;
@@ -131,6 +151,22 @@ if (process.argv instanceof Array) {
                         console.log(`Keys -a and -ac can be used only together.`);
                         process.exit(1);
                     }
+                }
+                let errors: string[] = [];
+                CHECK_PATHS.forEach((key: string) => {
+                    if (commands[key] === undefined) {
+                        return;
+                    }
+                    const filename: string | undefined = getValidPath(commands[key]);
+                    if (filename === undefined) {
+                        errors.push(`File ${commands[key]} isn't found.`)
+                        return;
+                    }
+                    commands[key] = filename;
+                });
+                if (errors.length > 0) {
+                    console.log(errors.join('\n'));
+                    process.exit(2);
                 }
                 try {
                     const builder = new Builder();
