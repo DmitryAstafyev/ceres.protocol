@@ -452,10 +452,16 @@ export const AdvancedTypes: { [key:string]: any} = {
     }
 };
 ```
+Let's generate our protocol now:
 
-> At the moment ceres.protocol doesn't support injection advanced types via CLI. This feature will be implemented with next versions of protocol generator.
+```
+ceres.protocol -s ./advanced.json -o advanced.ts -a advanced.types.ts -ac advanced.types.js -r
+```
 
-Now let's create script, which will generate our protocol. Create file **advanced.type.example.ts** with next content:
+> Note: to include your advanced types into protocol via CLI you should compile before TS file to JS. As you can see we are used key `-a` to define TS file with declaration of advanced types and key `-ac` to define path to JS file.
+
+Also you can generate protocol with advanced types programicaly. In this case you do not need compile your TS file to JS. Let's do it. Create file **advanced.type.example.ts** with next content:
+
 ```typescript
 import {
     // Creates protocol implementation from JSON
