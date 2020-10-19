@@ -105,5 +105,17 @@
         "key": "string",
         "value": "string"
     },
+    "Ints": {
+        "vInt8": "int8",
+        "vInt16": "int16",
+        "vInt32": "int32",
+        "vInt64": "int64"
+    },
+    "UInts": {
+        "vUInt8": "uint8",
+        "vUInt16": "uint16",
+        "vUInt32": "uint32",
+        "vUInt64": "uint64"
+    },
     "version": "0.0.1"
 }

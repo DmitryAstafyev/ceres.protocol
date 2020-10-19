@@ -121,6 +121,41 @@ export namespace Json {
                 return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
             }
         }
+        export class Int64 {
+            public static toUint8(int: any): Uint8Array {
+                function setInt64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
+                    const dw: DataView = new DataView(value);
+                    // JSBI polyfill implementation
+                    let lowWord = value[0], highWord = 0;
+                    if (value.length >= 2) {
+                        highWord = value[1];
+                    }
+                    dw.setInt32(littleEndian ? 0 : 4, lowWord, littleEndian);
+                    dw.setInt32(littleEndian ? 4 : 0, highWord, littleEndian);
+                    return new Uint8Array(dw.buffer);
+                }
+                return setInt64(int);
+            }
+            public static fromUint8(bytes: Uint8Array): number {
+                function getInt64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
+                    const left =  dataview.getInt32(byteOffset, littleEndian);
+                    const right = dataview.getInt32(byteOffset+4, littleEndian);
+                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
+                    if (!Number.isSafeInteger(combined))
+                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+                  
+                    return combined;
+                }
+                return getInt64(new DataView(bytes));
+            }
+            public static validate(value: number): Error | undefined {
+                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
+                    return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
+                }
+                const generated: number = this.fromUint8(this.toUint8(value));
+                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+            }
+        }
         export class Uint8 {
             public static fromAsciiStr(str: string): Uint8Array {
                 const result = new Uint8Array(str.length);
@@ -244,6 +279,41 @@ export namespace Json {
                 return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
             }
         }
+        export class Uint64 {
+            public static toUint8(int: any): Uint8Array {
+                function setUint64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
+                    const dw: DataView = new DataView(value);
+                    // JSBI polyfill implementation
+                    let lowWord = value[0], highWord = 0;
+                    if (value.length >= 2) {
+                        highWord = value[1];
+                    }
+                    dw.setUint32(littleEndian ? 0 : 4, lowWord, littleEndian);
+                    dw.setUint32(littleEndian ? 4 : 0, highWord, littleEndian);
+                    return new Uint8Array(dw.buffer);
+                }
+                return setUint64(int);
+            }
+            public static fromUint8(bytes: Uint8Array): number {
+                function getUint64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
+                    const left =  dataview.getUint32(byteOffset, littleEndian);
+                    const right = dataview.getUint32(byteOffset+4, littleEndian);
+                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
+                    if (!Number.isSafeInteger(combined))
+                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+                  
+                    return combined;
+                }
+                return getUint64(new DataView(bytes));
+            }
+            public static validate(value: number): Error | undefined {
+                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
+                    return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
+                }
+                const generated: number = this.fromUint8(this.toUint8(value));
+                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+            }
+        }
     }
 
     export namespace Scheme {
@@ -252,14 +322,16 @@ export namespace Json {
             int8: 0,
             int16: 1,
             int32: 2,
-            uint8: 3,
-            uint16: 4,
-            uint32: 5,
-            float32: 6,
-            float64: 7,
-            boolean: 8,
-            asciiString: 9,
-            utf8String: 10,
+            int64: 3,
+            uint8: 5,
+            uint16: 6,
+            uint32: 7,
+            uint64: 8,
+            float32: 10,
+            float64: 11,
+            boolean: 12,
+            asciiString: 13,
+            utf8String: 14,
             // Complex types
             object: 100,
             array: 101,
@@ -268,9 +340,11 @@ export namespace Json {
             [Types.int8]: 'int8',
             [Types.int16]: 'int16',
             [Types.int32]: 'int32',
+            [Types.int64]: 'int64',
             [Types.uint8]: 'uint8',
             [Types.uint16]: 'uint16',
             [Types.uint32]: 'uint32',
+            [Types.uint64]: 'uint64',
             [Types.float32]: 'float32',
             [Types.float64]: 'float64',
             [Types.boolean]: 'boolean',
@@ -282,9 +356,11 @@ export namespace Json {
             [Types.int8]: 1,
             [Types.int16]: 2,
             [Types.int32]: 4,
+            [Types.int64]: 8,
             [Types.uint8]: 1,
             [Types.uint16]: 2,
             [Types.uint32]: 4,
+            [Types.uint64]: 8,
             [Types.float32]: 4,
             [Types.float64]: 8,
             [Types.boolean]: 1,
@@ -293,9 +369,11 @@ export namespace Json {
             [Types.int8]: Impls.Int8,
             [Types.int16]: Impls.Int16,
             [Types.int32]: Impls.Int32,
+            [Types.int64]: Impls.Int64,
             [Types.uint8]: Impls.Uint8,
             [Types.uint16]: Impls.Uint16,
             [Types.uint32]: Impls.Uint32,
+            [Types.uint64]: Impls.Uint64,
             [Types.float32]: Impls.Float32,
             [Types.float64]: Impls.Float64,
             [Types.boolean]: Impls.Boolean,

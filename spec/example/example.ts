@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Tue Feb 26 2019 17:26:17 GMT+0100 (CET))
+* This file generated automaticaly (Mon Oct 19 2020 21:54:20 GMT+0200 (Central European Summer Time))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
@@ -42,11 +42,8 @@ export namespace Protocol {
 		ConnectionError |
 		BinaryData |
 		KeyValue |
-		Data |
-		Data.Write |
-		Data.Write.Request |
-		Data.Write.Response |
-		Data.Write.Status |
+		Ints |
+		UInts |
 		State |
 		State.Get |
 		State.Get.Response |
@@ -54,7 +51,12 @@ export namespace Protocol {
 		State.Set |
 		State.Set.Request |
 		State.Set.Response |
-		State.ServerState;
+		State.ServerState |
+		Data |
+		Data.Write |
+		Data.Write.Request |
+		Data.Write.Response |
+		Data.Write.Status;
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: map of types
@@ -205,28 +207,17 @@ export namespace Protocol {
 			bytes: "a",
 			sequence: "b",
 		},
-		"3B689B11": {
-			clientId: "a",
-			guid: "b",
+		"3B662457": {
+			vInt8: "a",
+			vInt16: "b",
+			vInt32: "c",
+			vInt64: "d",
 		},
-		"5CEC0A00": {
-			clientId: "a",
-			guid: "b",
-		},
-		"53C05B7F": {
-			clientId: "a",
-			guid: "b",
-			binary: "c",
-		},
-		"21235F71": {
-			clientId: "a",
-			guid: "b",
-			status: "c",
-		},
-		"62E617C0": {
-			bytes: "a",
-			started: "b",
-			finished: "c",
+		"30C6342C": {
+			vUInt8: "a",
+			vUInt16: "b",
+			vUInt32: "c",
+			vUInt64: "d",
 		},
 		"30CF0814": {
 			clientId: "a",
@@ -263,6 +254,29 @@ export namespace Protocol {
 			clientId: "a",
 			guid: "b",
 			status: "c",
+		},
+		"3B689B11": {
+			clientId: "a",
+			guid: "b",
+		},
+		"5CEC0A00": {
+			clientId: "a",
+			guid: "b",
+		},
+		"53C05B7F": {
+			clientId: "a",
+			guid: "b",
+			binary: "c",
+		},
+		"21235F71": {
+			clientId: "a",
+			guid: "b",
+			status: "c",
+		},
+		"62E617C0": {
+			bytes: "a",
+			started: "b",
+			finished: "c",
 		},
 	};
 	export const KeysMapRight: {[key: string]: any} = {
@@ -411,28 +425,17 @@ export namespace Protocol {
 			a: "bytes",
 			b: "sequence",
 		},
-		"3B689B11": {
-			a: "clientId",
-			b: "guid",
+		"3B662457": {
+			a: "vInt8",
+			b: "vInt16",
+			c: "vInt32",
+			d: "vInt64",
 		},
-		"5CEC0A00": {
-			a: "clientId",
-			b: "guid",
-		},
-		"53C05B7F": {
-			a: "clientId",
-			b: "guid",
-			c: "binary",
-		},
-		"21235F71": {
-			a: "clientId",
-			b: "guid",
-			c: "status",
-		},
-		"62E617C0": {
-			a: "bytes",
-			b: "started",
-			c: "finished",
+		"30C6342C": {
+			a: "vUInt8",
+			b: "vUInt16",
+			c: "vUInt32",
+			d: "vUInt64",
 		},
 		"30CF0814": {
 			a: "clientId",
@@ -469,6 +472,29 @@ export namespace Protocol {
 			a: "clientId",
 			b: "guid",
 			c: "status",
+		},
+		"3B689B11": {
+			a: "clientId",
+			b: "guid",
+		},
+		"5CEC0A00": {
+			a: "clientId",
+			b: "guid",
+		},
+		"53C05B7F": {
+			a: "clientId",
+			b: "guid",
+			c: "binary",
+		},
+		"21235F71": {
+			a: "clientId",
+			b: "guid",
+			c: "status",
+		},
+		"62E617C0": {
+			a: "bytes",
+			b: "started",
+			c: "finished",
 		},
 	};
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -644,32 +670,17 @@ export namespace Protocol {
 			a: "string",
 			b: "string",
 		},
-		"3B689B11": {
-			a: "string",
-			b: "guid",
+		"3B662457": {
+			a: "int8",
+			b: "int16",
+			c: "int32",
+			d: "int64",
 		},
-		"5CEC0A00": {
-			a: "string",
-			b: "guid",
-		},
-		"53C05B7F": {
-			a: "string",
-			b: "guid",
-			c: ["byte"],
-		},
-		"21235F71": {
-			a: "string",
-			b: "guid",
-			c: {
-				a: "integer",
-				b: "datetime",
-				c: "datetime",
-			},
-		},
-		"62E617C0": {
-			a: "integer",
-			b: "datetime",
-			c: "datetime",
+		"30C6342C": {
+			a: "uint8",
+			b: "uint16",
+			c: "uint32",
+			d: "uint64",
 		},
 		"30CF0814": {
 			a: "string",
@@ -714,6 +725,33 @@ export namespace Protocol {
 			a: "integer",
 			b: "datetime",
 			c: "string",
+		},
+		"3B689B11": {
+			a: "string",
+			b: "guid",
+		},
+		"5CEC0A00": {
+			a: "string",
+			b: "guid",
+		},
+		"53C05B7F": {
+			a: "string",
+			b: "guid",
+			c: ["byte"],
+		},
+		"21235F71": {
+			a: "string",
+			b: "guid",
+			c: {
+				a: "integer",
+				b: "datetime",
+				c: "datetime",
+			},
+		},
+		"62E617C0": {
+			a: "integer",
+			b: "datetime",
+			c: "datetime",
 		},
 	};
 
@@ -834,6 +872,41 @@ export namespace Protocol {
 	            public static fromUint8(bytes: Uint8Array): number {
 	                const int32 = new Int32Array((new Uint8Array(bytes)).buffer);
 	                return int32[0];
+	            }
+	            public static validate(value: number): Error | undefined {
+	                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
+	                    return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
+	                }
+	                const generated: number = this.fromUint8(this.toUint8(value));
+	                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+	            }
+	        }
+	        export class Int64 {
+	            public static toUint8(int: any): Uint8Array {
+	                function setInt64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
+	                    const dw: DataView = new DataView(value);
+	                    // JSBI polyfill implementation
+	                    let lowWord = value[0], highWord = 0;
+	                    if (value.length >= 2) {
+	                        highWord = value[1];
+	                    }
+	                    dw.setInt32(littleEndian ? 0 : 4, lowWord, littleEndian);
+	                    dw.setInt32(littleEndian ? 4 : 0, highWord, littleEndian);
+	                    return new Uint8Array(dw.buffer);
+	                }
+	                return setInt64(int);
+	            }
+	            public static fromUint8(bytes: Uint8Array): number {
+	                function getInt64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
+	                    const left =  dataview.getInt32(byteOffset, littleEndian);
+	                    const right = dataview.getInt32(byteOffset+4, littleEndian);
+	                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
+	                    if (!Number.isSafeInteger(combined))
+	                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+	                  
+	                    return combined;
+	                }
+	                return getInt64(new DataView(bytes));
 	            }
 	            public static validate(value: number): Error | undefined {
 	                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
@@ -966,6 +1039,41 @@ export namespace Protocol {
 	                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
 	            }
 	        }
+	        export class Uint64 {
+	            public static toUint8(int: any): Uint8Array {
+	                function setUint64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
+	                    const dw: DataView = new DataView(value);
+	                    // JSBI polyfill implementation
+	                    let lowWord = value[0], highWord = 0;
+	                    if (value.length >= 2) {
+	                        highWord = value[1];
+	                    }
+	                    dw.setUint32(littleEndian ? 0 : 4, lowWord, littleEndian);
+	                    dw.setUint32(littleEndian ? 4 : 0, highWord, littleEndian);
+	                    return new Uint8Array(dw.buffer);
+	                }
+	                return setUint64(int);
+	            }
+	            public static fromUint8(bytes: Uint8Array): number {
+	                function getUint64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
+	                    const left =  dataview.getUint32(byteOffset, littleEndian);
+	                    const right = dataview.getUint32(byteOffset+4, littleEndian);
+	                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
+	                    if (!Number.isSafeInteger(combined))
+	                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
+	                  
+	                    return combined;
+	                }
+	                return getUint64(new DataView(bytes));
+	            }
+	            public static validate(value: number): Error | undefined {
+	                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
+	                    return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
+	                }
+	                const generated: number = this.fromUint8(this.toUint8(value));
+	                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+	            }
+	        }
 	    }
 	
 	    export namespace Scheme {
@@ -974,14 +1082,16 @@ export namespace Protocol {
 	            int8: 0,
 	            int16: 1,
 	            int32: 2,
-	            uint8: 3,
-	            uint16: 4,
-	            uint32: 5,
-	            float32: 6,
-	            float64: 7,
-	            boolean: 8,
-	            asciiString: 9,
-	            utf8String: 10,
+	            int64: 3,
+	            uint8: 5,
+	            uint16: 6,
+	            uint32: 7,
+	            uint64: 8,
+	            float32: 10,
+	            float64: 11,
+	            boolean: 12,
+	            asciiString: 13,
+	            utf8String: 14,
 	            // Complex types
 	            object: 100,
 	            array: 101,
@@ -990,9 +1100,11 @@ export namespace Protocol {
 	            [Types.int8]: 'int8',
 	            [Types.int16]: 'int16',
 	            [Types.int32]: 'int32',
+	            [Types.int64]: 'int64',
 	            [Types.uint8]: 'uint8',
 	            [Types.uint16]: 'uint16',
 	            [Types.uint32]: 'uint32',
+	            [Types.uint64]: 'uint64',
 	            [Types.float32]: 'float32',
 	            [Types.float64]: 'float64',
 	            [Types.boolean]: 'boolean',
@@ -1004,9 +1116,11 @@ export namespace Protocol {
 	            [Types.int8]: 1,
 	            [Types.int16]: 2,
 	            [Types.int32]: 4,
+	            [Types.int64]: 8,
 	            [Types.uint8]: 1,
 	            [Types.uint16]: 2,
 	            [Types.uint32]: 4,
+	            [Types.uint64]: 8,
 	            [Types.float32]: 4,
 	            [Types.float64]: 8,
 	            [Types.boolean]: 1,
@@ -1015,9 +1129,11 @@ export namespace Protocol {
 	            [Types.int8]: Impls.Int8,
 	            [Types.int16]: Impls.Int16,
 	            [Types.int32]: Impls.Int32,
+	            [Types.int64]: Impls.Int64,
 	            [Types.uint8]: Impls.Uint8,
 	            [Types.uint16]: Impls.Uint16,
 	            [Types.uint32]: Impls.Uint32,
+	            [Types.uint64]: Impls.Uint64,
 	            [Types.float32]: Impls.Float32,
 	            [Types.float64]: Impls.Float64,
 	            [Types.boolean]: Impls.Boolean,
@@ -1355,8 +1471,8 @@ export namespace Protocol {
 	}
 	
 	export const StandardTypes: string[] = [
-	    'int8', 'int16', 'int32',
-	    'uint8', 'uint16', 'uint32',
+	    'int8', 'int16', 'int32', 'int64',
+	    'uint8', 'uint16', 'uint32', 'uint64',
 	    'float32', 'float64', 'boolean',
 	    'asciiString', 'utf8String',
 	];
@@ -2019,6 +2135,29 @@ export namespace Protocol {
 	        },
 	    } as IPrimitiveType<number>,
 	
+	    uint64     : {
+	        binaryType  : 'uint64',
+	        init        : '0',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            if (value < 0) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
 	    int8     : {
 	        binaryType  : 'int8',
 	        init        : '-1',
@@ -2061,6 +2200,26 @@ export namespace Protocol {
 	
 	    int32     : {
 	        binaryType  : 'int32',
+	        init        : '-1',
+	        parse       : (value: number) => value,
+	        serialize   : (value: number) => value,
+	        tsType      : 'number',
+	        validate    : (value: number) => {
+	            if (typeof value !== 'number') {
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    } as IPrimitiveType<number>,
+	
+	    int64     : {
+	        binaryType  : 'int64',
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
@@ -2339,11 +2498,8 @@ export namespace Protocol {
 		ReferencesMap["583DFB65"] = ConnectionError;
 		ReferencesMap["1D0934D0"] = BinaryData;
 		ReferencesMap["1DB68EE9"] = KeyValue;
-		ReferencesMap["3B689B11"] = Data;
-		ReferencesMap["5CEC0A00"] = Data.Write;
-		ReferencesMap["53C05B7F"] = Data.Write.Request;
-		ReferencesMap["21235F71"] = Data.Write.Response;
-		ReferencesMap["62E617C0"] = Data.Write.Status;
+		ReferencesMap["3B662457"] = Ints;
+		ReferencesMap["30C6342C"] = UInts;
 		ReferencesMap["30CF0814"] = State;
 		ReferencesMap["5CF12234"] = State.Get;
 		ReferencesMap["6A027D25"] = State.Get.Response;
@@ -2352,6 +2508,11 @@ export namespace Protocol {
 		ReferencesMap["5A4BA9C1"] = State.Set.Request;
 		ReferencesMap["DAEBCB1"] = State.Set.Response;
 		ReferencesMap["6AB58BEC"] = State.ServerState;
+		ReferencesMap["3B689B11"] = Data;
+		ReferencesMap["5CEC0A00"] = Data.Write;
+		ReferencesMap["53C05B7F"] = Data.Write.Request;
+		ReferencesMap["21235F71"] = Data.Write.Response;
+		ReferencesMap["62E617C0"] = Data.Write.Status;
 		ConvertedTypedEntitiesMap = convertTypesToStandard(TypedEntitiesMap);
 	}
 
@@ -2359,7 +2520,7 @@ export namespace Protocol {
 	* Injection: protocol signature
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	export function getSignature() {
-		return "634FAD14";
+		return "41AD7BB1";
 	}
 
 }
@@ -3374,156 +3535,76 @@ export class KeyValue extends Protocol.Root {
 
 	}
 }
-export class Data extends Protocol.Root {
+export class Ints extends Protocol.Root {
 	static getDescription(): {[key: string]: Protocol.IProperty } {
 		return {
-			clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
-			guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
+			vInt8: { name: "vInt8", value: "int8", type: Protocol.EEntityType.primitive, optional: false }, 
+			vInt16: { name: "vInt16", value: "int16", type: Protocol.EEntityType.primitive, optional: false }, 
+			vInt32: { name: "vInt32", value: "int32", type: Protocol.EEntityType.primitive, optional: false }, 
+			vInt64: { name: "vInt64", value: "int64", type: Protocol.EEntityType.primitive, optional: false }, 
 		}
 	}
-	public static __signature: string = "3B689B11";
-	public static getSignature(): string { return Data.__signature; }
+	public static __signature: string = "3B662457";
+	public static getSignature(): string { return Ints.__signature; }
 	public static getProtocol(): any { return Protocol; }
-	public __signature: string = Data.__signature;
+	public __signature: string = Ints.__signature;
 	public getSignature(): string { return this.__signature; }
 	public getProtocol(): any { return Protocol; }
-	public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Data); }
-	public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Data); }
-	public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Data.__signature, target); }
-	public clientId: string = "";
-	public guid?: string = guid();
+	public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Ints); }
+	public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Ints); }
+	public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Ints.__signature, target); }
+	public vInt8: number = -1;
+	public vInt16: number = -1;
+	public vInt32: number = -1;
+	public vInt64: number = -1;
 
-	constructor(args: { clientId: string, guid?: string }) {
+	constructor(args: { vInt8: number, vInt16: number, vInt32: number, vInt64: number }) {
 		super();
-		this.clientId = args.clientId;
-		args.guid !== void 0 && (this.guid = args.guid);
-		const errors: Error[] = Protocol.validateParams(args, Data);
+		this.vInt8 = args.vInt8;
+		this.vInt16 = args.vInt16;
+		this.vInt32 = args.vInt32;
+		this.vInt64 = args.vInt64;
+		const errors: Error[] = Protocol.validateParams(args, Ints);
 		if (errors.length > 0) {
-			throw new Error(`Cannot create class of "Data" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
+			throw new Error(`Cannot create class of "Ints" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
 		}
 
 	}
 }
-export namespace Data {
-	export class Write extends Data {
-		static getDescription(): {[key: string]: Protocol.IProperty } {
-			return {
-				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
-				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
-			}
-		}
-		public static __signature: string = "5CEC0A00";
-		public static getSignature(): string { return Write.__signature; }
-		public static getProtocol(): any { return Protocol; }
-		public __signature: string = Write.__signature;
-		public getSignature(): string { return this.__signature; }
-		public getProtocol(): any { return Protocol; }
-		public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Write); }
-		public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Write); }
-		public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Write.__signature, target); }
-
-		constructor(args: { clientId: string, guid?: string }) {
-			super(Object.assign(args, {}));
-			const errors: Error[] = Protocol.validateParams(args, Write);
-			if (errors.length > 0) {
-				throw new Error(`Cannot create class of "Write" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
-			}
-
+export class UInts extends Protocol.Root {
+	static getDescription(): {[key: string]: Protocol.IProperty } {
+		return {
+			vUInt8: { name: "vUInt8", value: "uint8", type: Protocol.EEntityType.primitive, optional: false }, 
+			vUInt16: { name: "vUInt16", value: "uint16", type: Protocol.EEntityType.primitive, optional: false }, 
+			vUInt32: { name: "vUInt32", value: "uint32", type: Protocol.EEntityType.primitive, optional: false }, 
+			vUInt64: { name: "vUInt64", value: "uint64", type: Protocol.EEntityType.primitive, optional: false }, 
 		}
 	}
-	export namespace Write {
-		export class Request extends Write {
-			static getDescription(): {[key: string]: Protocol.IProperty } {
-				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
-					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
-					binary: { name: "binary", value: "byte", type: Protocol.EEntityType.repeated, optional: false }, 
-				}
-			}
-			public static __signature: string = "53C05B7F";
-			public static getSignature(): string { return Request.__signature; }
-			public static getProtocol(): any { return Protocol; }
-			public __signature: string = Request.__signature;
-			public getSignature(): string { return this.__signature; }
-			public getProtocol(): any { return Protocol; }
-			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Request); }
-			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Request); }
-			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Request.__signature, target); }
-			public binary: Array<number> = [];
+	public static __signature: string = "30C6342C";
+	public static getSignature(): string { return UInts.__signature; }
+	public static getProtocol(): any { return Protocol; }
+	public __signature: string = UInts.__signature;
+	public getSignature(): string { return this.__signature; }
+	public getProtocol(): any { return Protocol; }
+	public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, UInts); }
+	public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, UInts); }
+	public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(UInts.__signature, target); }
+	public vUInt8: number = 0;
+	public vUInt16: number = 0;
+	public vUInt32: number = 0;
+	public vUInt64: number = 0;
 
-			constructor(args: { clientId: string, guid?: string, binary: Array<number> }) {
-				super(Object.assign(args, {}));
-				this.binary = args.binary;
-				const errors: Error[] = Protocol.validateParams(args, Request);
-				if (errors.length > 0) {
-					throw new Error(`Cannot create class of "Request" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
-				}
-
-			}
+	constructor(args: { vUInt8: number, vUInt16: number, vUInt32: number, vUInt64: number }) {
+		super();
+		this.vUInt8 = args.vUInt8;
+		this.vUInt16 = args.vUInt16;
+		this.vUInt32 = args.vUInt32;
+		this.vUInt64 = args.vUInt64;
+		const errors: Error[] = Protocol.validateParams(args, UInts);
+		if (errors.length > 0) {
+			throw new Error(`Cannot create class of "UInts" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
 		}
-		export class Response extends Write {
-			static getDescription(): {[key: string]: Protocol.IProperty } {
-				return {
-					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
-					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
-					status: { name: "status", value: Data.Write.Status, type: Protocol.EEntityType.reference, optional: false }, 
-				}
-			}
-			public static __signature: string = "21235F71";
-			public static getSignature(): string { return Response.__signature; }
-			public static getProtocol(): any { return Protocol; }
-			public __signature: string = Response.__signature;
-			public getSignature(): string { return this.__signature; }
-			public getProtocol(): any { return Protocol; }
-			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Response); }
-			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Response); }
-			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Response.__signature, target); }
-			public status: Data.Write.Status;
 
-			constructor(args: { clientId: string, guid?: string, status: Data.Write.Status }) {
-				super(Object.assign(args, {}));
-				this.status = args.status;
-				const errors: Error[] = Protocol.validateParams(args, Response);
-				if (errors.length > 0) {
-					throw new Error(`Cannot create class of "Response" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
-				}
-
-			}
-		}
-		export class Status extends Protocol.Root {
-			static getDescription(): {[key: string]: Protocol.IProperty } {
-				return {
-					bytes: { name: "bytes", value: "integer", type: Protocol.EEntityType.primitive, optional: false }, 
-					started: { name: "started", value: "datetime", type: Protocol.EEntityType.primitive, optional: false }, 
-					finished: { name: "finished", value: "datetime", type: Protocol.EEntityType.primitive, optional: false }, 
-				}
-			}
-			public static __signature: string = "62E617C0";
-			public static getSignature(): string { return Status.__signature; }
-			public static getProtocol(): any { return Protocol; }
-			public __signature: string = Status.__signature;
-			public getSignature(): string { return this.__signature; }
-			public getProtocol(): any { return Protocol; }
-			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Status); }
-			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Status); }
-			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Status.__signature, target); }
-			public bytes: number = -1;
-			public started: Date = new Date();
-			public finished: Date = new Date();
-
-			constructor(args: { bytes: number, started: Date, finished: Date }) {
-				super();
-				this.bytes = args.bytes;
-				this.started = args.started;
-				this.finished = args.finished;
-				const errors: Error[] = Protocol.validateParams(args, Status);
-				if (errors.length > 0) {
-					throw new Error(`Cannot create class of "Status" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
-				}
-
-			}
-		}
-		type TResponses = Response;
 	}
 }
 export class State extends Protocol.Root {
@@ -3766,6 +3847,158 @@ export namespace State {
 			WORKING = 'WORKING',
 			PENDING = 'PENDING'
 		}
+	}
+}
+export class Data extends Protocol.Root {
+	static getDescription(): {[key: string]: Protocol.IProperty } {
+		return {
+			clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+			guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
+		}
+	}
+	public static __signature: string = "3B689B11";
+	public static getSignature(): string { return Data.__signature; }
+	public static getProtocol(): any { return Protocol; }
+	public __signature: string = Data.__signature;
+	public getSignature(): string { return this.__signature; }
+	public getProtocol(): any { return Protocol; }
+	public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Data); }
+	public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Data); }
+	public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Data.__signature, target); }
+	public clientId: string = "";
+	public guid?: string = guid();
+
+	constructor(args: { clientId: string, guid?: string }) {
+		super();
+		this.clientId = args.clientId;
+		args.guid !== void 0 && (this.guid = args.guid);
+		const errors: Error[] = Protocol.validateParams(args, Data);
+		if (errors.length > 0) {
+			throw new Error(`Cannot create class of "Data" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
+		}
+
+	}
+}
+export namespace Data {
+	export class Write extends Data {
+		static getDescription(): {[key: string]: Protocol.IProperty } {
+			return {
+				clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+				guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
+			}
+		}
+		public static __signature: string = "5CEC0A00";
+		public static getSignature(): string { return Write.__signature; }
+		public static getProtocol(): any { return Protocol; }
+		public __signature: string = Write.__signature;
+		public getSignature(): string { return this.__signature; }
+		public getProtocol(): any { return Protocol; }
+		public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Write); }
+		public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Write); }
+		public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Write.__signature, target); }
+
+		constructor(args: { clientId: string, guid?: string }) {
+			super(Object.assign(args, {}));
+			const errors: Error[] = Protocol.validateParams(args, Write);
+			if (errors.length > 0) {
+				throw new Error(`Cannot create class of "Write" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
+			}
+
+		}
+	}
+	export namespace Write {
+		export class Request extends Write {
+			static getDescription(): {[key: string]: Protocol.IProperty } {
+				return {
+					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
+					binary: { name: "binary", value: "byte", type: Protocol.EEntityType.repeated, optional: false }, 
+				}
+			}
+			public static __signature: string = "53C05B7F";
+			public static getSignature(): string { return Request.__signature; }
+			public static getProtocol(): any { return Protocol; }
+			public __signature: string = Request.__signature;
+			public getSignature(): string { return this.__signature; }
+			public getProtocol(): any { return Protocol; }
+			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Request); }
+			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Request); }
+			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Request.__signature, target); }
+			public binary: Array<number> = [];
+
+			constructor(args: { clientId: string, guid?: string, binary: Array<number> }) {
+				super(Object.assign(args, {}));
+				this.binary = args.binary;
+				const errors: Error[] = Protocol.validateParams(args, Request);
+				if (errors.length > 0) {
+					throw new Error(`Cannot create class of "Request" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
+				}
+
+			}
+		}
+		export class Response extends Write {
+			static getDescription(): {[key: string]: Protocol.IProperty } {
+				return {
+					clientId: { name: "clientId", value: "string", type: Protocol.EEntityType.primitive, optional: false }, 
+					guid: { name: "guid", value: "guid", type: Protocol.EEntityType.primitive, optional: true }, 
+					status: { name: "status", value: Data.Write.Status, type: Protocol.EEntityType.reference, optional: false }, 
+				}
+			}
+			public static __signature: string = "21235F71";
+			public static getSignature(): string { return Response.__signature; }
+			public static getProtocol(): any { return Protocol; }
+			public __signature: string = Response.__signature;
+			public getSignature(): string { return this.__signature; }
+			public getProtocol(): any { return Protocol; }
+			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Response); }
+			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Response); }
+			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Response.__signature, target); }
+			public status: Data.Write.Status;
+
+			constructor(args: { clientId: string, guid?: string, status: Data.Write.Status }) {
+				super(Object.assign(args, {}));
+				this.status = args.status;
+				const errors: Error[] = Protocol.validateParams(args, Response);
+				if (errors.length > 0) {
+					throw new Error(`Cannot create class of "Response" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
+				}
+
+			}
+		}
+		export class Status extends Protocol.Root {
+			static getDescription(): {[key: string]: Protocol.IProperty } {
+				return {
+					bytes: { name: "bytes", value: "integer", type: Protocol.EEntityType.primitive, optional: false }, 
+					started: { name: "started", value: "datetime", type: Protocol.EEntityType.primitive, optional: false }, 
+					finished: { name: "finished", value: "datetime", type: Protocol.EEntityType.primitive, optional: false }, 
+				}
+			}
+			public static __signature: string = "62E617C0";
+			public static getSignature(): string { return Status.__signature; }
+			public static getProtocol(): any { return Protocol; }
+			public __signature: string = Status.__signature;
+			public getSignature(): string { return this.__signature; }
+			public getProtocol(): any { return Protocol; }
+			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Status); }
+			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Status); }
+			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Status.__signature, target); }
+			public bytes: number = -1;
+			public started: Date = new Date();
+			public finished: Date = new Date();
+
+			constructor(args: { bytes: number, started: Date, finished: Date }) {
+				super();
+				this.bytes = args.bytes;
+				this.started = args.started;
+				this.finished = args.finished;
+				const errors: Error[] = Protocol.validateParams(args, Status);
+				if (errors.length > 0) {
+					throw new Error(`Cannot create class of "Status" due error(s):\n${errors.map((error: Error) => { return `\t- ${error.message}`; }).join('\n')}`);
+				}
+
+			}
+		}
+		type TResponses = Response;
 	}
 }
 

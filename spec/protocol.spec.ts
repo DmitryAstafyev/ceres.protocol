@@ -211,6 +211,43 @@ describe('[Test][platform][protocol]', () => {
                                 });
                                 expect(DataWriteResponse instanceof proto.Data.Write.Response).toBe(true);
                                 console.log(`DataWriteResponse created.`);
+                                console.log('Pack int/uint data');
+                                const s8 = 254;
+                                const s16 = s8 * s8;
+                                const s32 = s16 * s16;
+                                const s64 = s32 * s32;
+                                const ints: any = new proto.Ints({
+                                    "vInt8": s8,
+                                    "vInt16": s16,
+                                    "vInt32": s32,
+                                    "vInt64": s64,
+                                });
+                                const uints: any = new proto.UInts({
+                                    "vUInt8": s8,
+                                    "vUInt16": s16,
+                                    "vUInt32": s32,
+                                    "vUInt64": s64,
+                                });
+                                const intsPackageA = proto.join([
+                                    ints.stringify(),
+                                    uints.stringify()
+                                ]);
+                                console.log('Unpack data');
+                                const intsUnpackedA = proto.split(intsPackageA);
+                                expect(intsUnpackedA instanceof Array).toBe(true);
+                                expect(intsUnpackedA.length === 2).toBe(true);
+                                const _ints = proto.parse(intsUnpackedA[0]);
+                                const _uints = proto.parse(intsUnpackedA[1]);
+                                expect(_ints instanceof proto.Ints).toBe(true);
+                                expect(_uints instanceof proto.UInts).toBe(true);
+                                expect(_ints.vInt8 === s8).toBe(true);
+                                expect(_ints.vInt16 === s16).toBe(true);
+                                expect(_ints.vInt32 === s32).toBe(true);
+                                expect(_ints.vInt64 === s64).toBe(true);
+                                expect(_uints.vUInt8 === s8).toBe(true);
+                                expect(_uints.vUInt16 === s16).toBe(true);
+                                expect(_uints.vUInt32 === s32).toBe(true);
+                                expect(_uints.vUInt64 === s64).toBe(true);
                                 return done();
                             } catch(e) {
                                 logger.error(e.message);
