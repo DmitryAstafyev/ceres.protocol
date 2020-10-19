@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Tue Oct 20 2020 00:20:54 GMT+0200 (Central European Summer Time))
+* This file generated automaticaly (Tue Oct 20 2020 01:58:03 GMT+0200 (Central European Summer Time))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
@@ -883,30 +883,18 @@ export namespace Protocol {
 	        }
 	        export class Int64 {
 	            public static toUint8(int: any): Uint8Array {
-	                function setInt64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
-	                    const dw: DataView = new DataView(value);
-	                    // JSBI polyfill implementation
-	                    let lowWord = value[0], highWord = 0;
-	                    if (value.length >= 2) {
-	                        highWord = value[1];
-	                    }
-	                    dw.setInt32(littleEndian ? 0 : 4, lowWord, littleEndian);
-	                    dw.setInt32(littleEndian ? 4 : 0, highWord, littleEndian);
+	                function setInt64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
+	                    const dw: DataView = new DataView(new ArrayBuffer(8));
+	                    dw.setBigInt64(offset, value, littleEndian);
 	                    return new Uint8Array(dw.buffer);
 	                }
 	                return setInt64(int);
 	            }
 	            public static fromUint8(bytes: Uint8Array): number {
-	                function getInt64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
-	                    const left =  dataview.getInt32(byteOffset, littleEndian);
-	                    const right = dataview.getInt32(byteOffset+4, littleEndian);
-	                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
-	                    if (!Number.isSafeInteger(combined))
-	                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
-	                  
-	                    return combined;
+	                function getInt64(dataview: DataView, offset: number = 0, littleEndian: boolean = true): any {
+	                    return dataview.getBigInt64(offset, littleEndian);
 	                }
-	                return getInt64(new DataView(bytes));
+	                return getInt64(new DataView(bytes.buffer));
 	            }
 	            public static validate(value: number): Error | undefined {
 	                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
@@ -1041,30 +1029,18 @@ export namespace Protocol {
 	        }
 	        export class Uint64 {
 	            public static toUint8(int: any): Uint8Array {
-	                function setUint64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
-	                    const dw: DataView = new DataView(value);
-	                    // JSBI polyfill implementation
-	                    let lowWord = value[0], highWord = 0;
-	                    if (value.length >= 2) {
-	                        highWord = value[1];
-	                    }
-	                    dw.setUint32(littleEndian ? 0 : 4, lowWord, littleEndian);
-	                    dw.setUint32(littleEndian ? 4 : 0, highWord, littleEndian);
+	                function setUint64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
+	                    const dw: DataView = new DataView(new ArrayBuffer(8));
+	                    dw.setBigUint64(offset, value, littleEndian);
 	                    return new Uint8Array(dw.buffer);
 	                }
 	                return setUint64(int);
 	            }
 	            public static fromUint8(bytes: Uint8Array): number {
-	                function getUint64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
-	                    const left =  dataview.getUint32(byteOffset, littleEndian);
-	                    const right = dataview.getUint32(byteOffset+4, littleEndian);
-	                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
-	                    if (!Number.isSafeInteger(combined))
-	                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
-	                  
-	                    return combined;
+	                function getUint64(dataview: DataView, offset: number = 0, littleEndian: boolean = true): any {
+	                    return dataview.getBigUint64(offset, littleEndian);
 	                }
-	                return getUint64(new DataView(bytes));
+	                return getUint64(new DataView(bytes.buffer));
 	            }
 	            public static validate(value: number): Error | undefined {
 	                if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
@@ -1083,15 +1059,15 @@ export namespace Protocol {
 	            int16: 1,
 	            int32: 2,
 	            int64: 3,
-	            uint8: 5,
-	            uint16: 6,
-	            uint32: 7,
-	            uint64: 8,
-	            float32: 10,
-	            float64: 11,
-	            boolean: 12,
-	            asciiString: 13,
-	            utf8String: 14,
+	            uint8: 4,
+	            uint16: 5,
+	            uint32: 6,
+	            uint64: 7,
+	            float32: 8,
+	            float64: 9,
+	            boolean: 10,
+	            asciiString: 11,
+	            utf8String: 12,
 	            // Complex types
 	            object: 100,
 	            array: 101,
@@ -1419,6 +1395,95 @@ export namespace Protocol {
 	            }
 	        }
 	    }
+	}
+	
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: injection.packager.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	// tslint:disable:no-namespace
+	// tslint:disable:max-classes-per-file
+	// tslint:disable:object-literal-sort-keys
+	
+	// declare var Json: any;
+	
+	export namespace Packager {
+	
+	    export function join(...items: any[]): string | Uint8Array | Error {
+	        if (items instanceof Array && items.length === 1 && items[0] instanceof Array) {
+	            items = items[0];
+	        }
+	        if (!(items instanceof Array) || items.length === 0) {
+	            return new Error(`No arguments provided to join`);
+	        }
+	        const strs: any[] = [];
+	        const bytes: number[] = [];
+	        let isBinary: boolean | undefined;
+	        try {
+	            items.forEach((item: any, i: number) => {
+	                if (item instanceof Uint8Array && (isBinary === undefined || isBinary === true)) {
+	                    isBinary = true;
+	                    if (i === 0) {
+	                        // Set type as array
+	                        bytes.push(Json.Scheme.Types.array);
+	                    }
+	                    // Set length of item
+	                    bytes.push(...Json.Impls.Uint32.toUint8(item.length));
+	                    // Put item
+	                    bytes.push(...item);
+	                } else if (typeof item === 'string' && (isBinary === undefined || isBinary === false)) {
+	                    isBinary = false;
+	                    strs.push(item);
+	                } else {
+	                    throw new Error(`Only strings or Uint8Array can be joined. Each array item should be same type.`);
+	                }
+	            });
+	            if (isBinary) {
+	                return new Uint8Array(bytes);
+	            }
+	        } catch (error) {
+	            return error;
+	        }
+	        return JSON.stringify(strs);
+	    }
+	
+	    export function split(source: string | Uint8Array): string[] | Uint8Array[] | Error {
+	        if (!isPackage(source)) {
+	            return new Error(`Source isn't a package of protocol data.`);
+	        }
+	        if (source instanceof ArrayBuffer) {
+	            source = new Uint8Array(source);
+	        }
+	        if (source instanceof Uint8Array) {
+	            let buffer = source.slice(1, source.length);
+	            const items: Uint8Array[] = [];
+	            do {
+	                const itemLength = Json.Impls.Uint32.fromUint8(buffer.slice(0, 4));
+	                items.push(buffer.slice(4, 4 + itemLength));
+	                buffer = buffer.slice(4 + itemLength, buffer.length);
+	            } while (buffer.length > 0);
+	            return items;
+	        } else {
+	            return JSON.parse(source) as string[];
+	        }
+	    }
+	
+	    export function isPackage(source: any): boolean {
+	        if (source instanceof Uint8Array) {
+	            return source[0] === Json.Scheme.Types.array;
+	        } else if (source instanceof ArrayBuffer) {
+	            const uint8array: Uint8Array = new Uint8Array(source);
+	            return uint8array.length > 0 ? (uint8array[0] === Json.Scheme.Types.array) : false;
+	        } else if (typeof source === 'string') {
+	            try {
+	                return JSON.parse(source) instanceof Array;
+	            } catch (error) {
+	                return false;
+	            }
+	        } else {
+	            return false;
+	        }
+	    }
+	
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -1968,6 +2033,33 @@ export namespace Protocol {
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: test.advanced.types.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	export const AdvancedTypes: { [key:string]: any} = {
+	    byte: {
+	        binaryType  : 'uint8',
+	        init        : '-1',
+	        parse       : (value: number) => { return value; },
+	        serialize   : (value: number) => { return value; },
+	        tsType      : 'number',
+	        validate    : (value: number) => { 
+	            if (typeof value !== 'number'){
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)){
+	                return false;
+	            }
+	            if (value < 0 || value > 255) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    }
+	};
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.types.primitive.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
@@ -2349,122 +2441,6 @@ export namespace Protocol {
 	
 	};
 	
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: injection.packager.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	// tslint:disable:no-namespace
-	// tslint:disable:max-classes-per-file
-	// tslint:disable:object-literal-sort-keys
-	
-	// declare var Json: any;
-	
-	export namespace Packager {
-	
-	    export function join(...items: any[]): string | Uint8Array | Error {
-	        if (items instanceof Array && items.length === 1 && items[0] instanceof Array) {
-	            items = items[0];
-	        }
-	        if (!(items instanceof Array) || items.length === 0) {
-	            return new Error(`No arguments provided to join`);
-	        }
-	        const strs: any[] = [];
-	        const bytes: number[] = [];
-	        let isBinary: boolean | undefined;
-	        try {
-	            items.forEach((item: any, i: number) => {
-	                if (item instanceof Uint8Array && (isBinary === undefined || isBinary === true)) {
-	                    isBinary = true;
-	                    if (i === 0) {
-	                        // Set type as array
-	                        bytes.push(Json.Scheme.Types.array);
-	                    }
-	                    // Set length of item
-	                    bytes.push(...Json.Impls.Uint32.toUint8(item.length));
-	                    // Put item
-	                    bytes.push(...item);
-	                } else if (typeof item === 'string' && (isBinary === undefined || isBinary === false)) {
-	                    isBinary = false;
-	                    strs.push(item);
-	                } else {
-	                    throw new Error(`Only strings or Uint8Array can be joined. Each array item should be same type.`);
-	                }
-	            });
-	            if (isBinary) {
-	                return new Uint8Array(bytes);
-	            }
-	        } catch (error) {
-	            return error;
-	        }
-	        return JSON.stringify(strs);
-	    }
-	
-	    export function split(source: string | Uint8Array): string[] | Uint8Array[] | Error {
-	        if (!isPackage(source)) {
-	            return new Error(`Source isn't a package of protocol data.`);
-	        }
-	        if (source instanceof ArrayBuffer) {
-	            source = new Uint8Array(source);
-	        }
-	        if (source instanceof Uint8Array) {
-	            let buffer = source.slice(1, source.length);
-	            const items: Uint8Array[] = [];
-	            do {
-	                const itemLength = Json.Impls.Uint32.fromUint8(buffer.slice(0, 4));
-	                items.push(buffer.slice(4, 4 + itemLength));
-	                buffer = buffer.slice(4 + itemLength, buffer.length);
-	            } while (buffer.length > 0);
-	            return items;
-	        } else {
-	            return JSON.parse(source) as string[];
-	        }
-	    }
-	
-	    export function isPackage(source: any): boolean {
-	        if (source instanceof Uint8Array) {
-	            return source[0] === Json.Scheme.Types.array;
-	        } else if (source instanceof ArrayBuffer) {
-	            const uint8array: Uint8Array = new Uint8Array(source);
-	            return uint8array.length > 0 ? (uint8array[0] === Json.Scheme.Types.array) : false;
-	        } else if (typeof source === 'string') {
-	            try {
-	                return JSON.parse(source) instanceof Array;
-	            } catch (error) {
-	                return false;
-	            }
-	        } else {
-	            return false;
-	        }
-	    }
-	
-	}
-	
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: test.advanced.types.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	export const AdvancedTypes: { [key:string]: any} = {
-	    byte: {
-	        binaryType  : 'uint8',
-	        init        : '-1',
-	        parse       : (value: number) => { return value; },
-	        serialize   : (value: number) => { return value; },
-	        tsType      : 'number',
-	        validate    : (value: number) => { 
-	            if (typeof value !== 'number'){
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)){
-	                return false;
-	            }
-	            if (value < 0 || value > 255) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    }
-	};
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: map of references

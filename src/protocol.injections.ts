@@ -29,7 +29,7 @@ export class Injections {
             // Read files
             Promise.all(files.map((file: string) => {
                 return new Promise((resolveFileTask, rejectFileTask) => {
-                    FS.readFile(file, (error: Error, buffer: Buffer) => {
+                    FS.readFile(file, (error: Error | null, buffer: Buffer) => {
                         if (error) {
                             return rejectFileTask(error);
                         }

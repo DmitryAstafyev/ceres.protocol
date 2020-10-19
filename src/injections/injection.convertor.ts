@@ -123,30 +123,18 @@ export namespace Json {
         }
         export class Int64 {
             public static toUint8(int: any): Uint8Array {
-                function setInt64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
-                    const dw: DataView = new DataView(value);
-                    // JSBI polyfill implementation
-                    let lowWord = value[0], highWord = 0;
-                    if (value.length >= 2) {
-                        highWord = value[1];
-                    }
-                    dw.setInt32(littleEndian ? 0 : 4, lowWord, littleEndian);
-                    dw.setInt32(littleEndian ? 4 : 0, highWord, littleEndian);
+                function setInt64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
+                    const dw: DataView = new DataView(new ArrayBuffer(8));
+                    dw.setBigInt64(offset, value, littleEndian);
                     return new Uint8Array(dw.buffer);
                 }
                 return setInt64(int);
             }
             public static fromUint8(bytes: Uint8Array): number {
-                function getInt64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
-                    const left =  dataview.getInt32(byteOffset, littleEndian);
-                    const right = dataview.getInt32(byteOffset+4, littleEndian);
-                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
-                    if (!Number.isSafeInteger(combined))
-                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
-                  
-                    return combined;
+                function getInt64(dataview: DataView, offset: number = 0, littleEndian: boolean = true): any {
+                    return dataview.getBigInt64(offset, littleEndian);
                 }
-                return getInt64(new DataView(bytes));
+                return getInt64(new DataView(bytes.buffer));
             }
             public static validate(value: number): Error | undefined {
                 if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
@@ -281,30 +269,18 @@ export namespace Json {
         }
         export class Uint64 {
             public static toUint8(int: any): Uint8Array {
-                function setUint64(value: any, byteOffset: number = 0, littleEndian: boolean = true): Uint8Array {
-                    const dw: DataView = new DataView(value);
-                    // JSBI polyfill implementation
-                    let lowWord = value[0], highWord = 0;
-                    if (value.length >= 2) {
-                        highWord = value[1];
-                    }
-                    dw.setUint32(littleEndian ? 0 : 4, lowWord, littleEndian);
-                    dw.setUint32(littleEndian ? 4 : 0, highWord, littleEndian);
+                function setUint64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
+                    const dw: DataView = new DataView(new ArrayBuffer(8));
+                    dw.setBigUint64(offset, value, littleEndian);
                     return new Uint8Array(dw.buffer);
                 }
                 return setUint64(int);
             }
             public static fromUint8(bytes: Uint8Array): number {
-                function getUint64(dataview: DataView, byteOffset: number = 0, littleEndian: boolean = true): number {
-                    const left =  dataview.getUint32(byteOffset, littleEndian);
-                    const right = dataview.getUint32(byteOffset+4, littleEndian);
-                    const combined = littleEndian? left + 2**32*right : 2**32*left + right;
-                    if (!Number.isSafeInteger(combined))
-                      console.warn(combined, 'exceeds MAX_SAFE_INTEGER. Precision may be lost');
-                  
-                    return combined;
+                function getUint64(dataview: DataView, offset: number = 0, littleEndian: boolean = true): any {
+                    return dataview.getBigUint64(offset, littleEndian);
                 }
-                return getUint64(new DataView(bytes));
+                return getUint64(new DataView(bytes.buffer));
             }
             public static validate(value: number): Error | undefined {
                 if (typeof value !== 'number' || isNaN(value) || !isFinite(value)) {
@@ -323,15 +299,15 @@ export namespace Json {
             int16: 1,
             int32: 2,
             int64: 3,
-            uint8: 5,
-            uint16: 6,
-            uint32: 7,
-            uint64: 8,
-            float32: 10,
-            float64: 11,
-            boolean: 12,
-            asciiString: 13,
-            utf8String: 14,
+            uint8: 4,
+            uint16: 5,
+            uint32: 6,
+            uint64: 7,
+            float32: 8,
+            float64: 9,
+            boolean: 10,
+            asciiString: 11,
+            utf8String: 12,
             // Complex types
             object: 100,
             array: 101,
