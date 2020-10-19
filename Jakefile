@@ -59,7 +59,7 @@ namespace('solution', function() {
     task('compile', function() {
         logo();
         const paths = {
-            injectionsDest: path.normalize(path.join(__dirname, '/dist/injections')),
+            injectionsDest: path.normalize(path.join(__dirname, '/dist/')),
             injectionsSrc: path.normalize(path.join(__dirname, '/src/injections/')),
             dist: path.normalize(path.join(__dirname, '/dist')),
         };
