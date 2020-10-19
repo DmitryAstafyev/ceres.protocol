@@ -561,9 +561,11 @@ export namespace Json {
                     case Scheme.Types.uint8:
                     case Scheme.Types.uint16:
                     case Scheme.Types.uint32:
+                    case Scheme.Types.uint64:
                     case Scheme.Types.int8:
                     case Scheme.Types.int16:
                     case Scheme.Types.int32:
+                    case Scheme.Types.int64:
                     case Scheme.Types.float32:
                     case Scheme.Types.float64:
                     case Scheme.Types.boolean:
@@ -600,9 +602,11 @@ export namespace Json {
                 case Scheme.Types.uint8:
                 case Scheme.Types.uint16:
                 case Scheme.Types.uint32:
+                case Scheme.Types.uint64:
                 case Scheme.Types.int8:
                 case Scheme.Types.int16:
                 case Scheme.Types.int32:
+                case Scheme.Types.int64:
                 case Scheme.Types.float32:
                 case Scheme.Types.float64:
                 case Scheme.Types.boolean:
@@ -629,9 +633,11 @@ export namespace Json {
                 case Scheme.Types.uint8:
                 case Scheme.Types.uint16:
                 case Scheme.Types.uint32:
+                case Scheme.Types.uint64:
                 case Scheme.Types.int8:
                 case Scheme.Types.int16:
                 case Scheme.Types.int32:
+                case Scheme.Types.int64:
                 case Scheme.Types.float32:
                 case Scheme.Types.float64:
                 case Scheme.Types.boolean:
