@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Mon Oct 19 2020 21:54:20 GMT+0200 (Central European Summer Time))
+* This file generated automaticaly (Mon Oct 19 2020 22:05:56 GMT+0200 (Central European Summer Time))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
