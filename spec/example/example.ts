@@ -1,6 +1,6 @@
 /* tslint:disable */
 /*
-* This file generated automaticaly (Tue Oct 20 2020 01:58:03 GMT+0200 (Central European Summer Time))
+* This file generated automaticaly (Tue Oct 20 2020 09:42:00 GMT+0200 (Central European Summer Time))
 * Do not remove or change this code.
 * Protocol version: 0.0.1
 */
@@ -885,7 +885,7 @@ export namespace Protocol {
 	            public static toUint8(int: any): Uint8Array {
 	                function setInt64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
 	                    const dw: DataView = new DataView(new ArrayBuffer(8));
-	                    dw.setBigInt64(offset, value, littleEndian);
+	                    dw.setBigInt64(offset, BigInt(value), littleEndian);
 	                    return new Uint8Array(dw.buffer);
 	                }
 	                return setInt64(int);
@@ -901,7 +901,7 @@ export namespace Protocol {
 	                    return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
 	                }
 	                const generated: number = this.fromUint8(this.toUint8(value));
-	                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+	                return generated == value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
 	            }
 	        }
 	        export class Uint8 {
@@ -1031,7 +1031,7 @@ export namespace Protocol {
 	            public static toUint8(int: any): Uint8Array {
 	                function setUint64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
 	                    const dw: DataView = new DataView(new ArrayBuffer(8));
-	                    dw.setBigUint64(offset, value, littleEndian);
+	                    dw.setBigUint64(offset, BigInt(value), littleEndian);
 	                    return new Uint8Array(dw.buffer);
 	                }
 	                return setUint64(int);
@@ -1047,7 +1047,7 @@ export namespace Protocol {
 	                    return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
 	                }
 	                const generated: number = this.fromUint8(this.toUint8(value));
-	                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+	                return generated == value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
 	            }
 	        }
 	    }
@@ -1487,6 +1487,33 @@ export namespace Protocol {
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	* Injection: test.advanced.types.ts
+	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+	export const AdvancedTypes: { [key:string]: any} = {
+	    byte: {
+	        binaryType  : 'uint8',
+	        init        : '-1',
+	        parse       : (value: number) => { return value; },
+	        serialize   : (value: number) => { return value; },
+	        tsType      : 'number',
+	        validate    : (value: number) => { 
+	            if (typeof value !== 'number'){
+	                return false;
+	            }
+	            if (isNaN(value)) {
+	                return false;
+	            }
+	            if (!Number.isInteger(value)){
+	                return false;
+	            }
+	            if (value < 0 || value > 255) {
+	                return false;
+	            }
+	            return true;
+	        },
+	    }
+	};
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.root.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	// tslint:disable:max-classes-per-file
@@ -1924,8 +1951,8 @@ export namespace Protocol {
 	                if (typeof desc.value === 'string') {
 	                    params[prop] = params[prop].map((value: any) => {
 	                        const nestedType = types[desc.value];
-	                        if (typeOf(value) !== nestedType.tsType) {
-	                            errors.push(new Error(`Property "${prop}" has wrong format. Expected an array (repeated) of "${nestedType.tsType}"`));
+	                        if (nestedType.tsType.indexOf(typeOf(value)) === -1) {
+	                            errors.push(new Error(`Property "${prop}" has wrong format. Expected an array (repeated) of "${nestedType.tsType.join(', ')}"`));
 	                        }
 	                    });
 	                } else if (typeof desc.value === 'function') {
@@ -1946,8 +1973,8 @@ export namespace Protocol {
 	                break;
 	            case EEntityType.primitive:
 	                const type = types[desc.value];
-	                if (typeOf(params[prop]) !== type.tsType) {
-	                    errors.push(new Error(`Property "${prop}" has wrong format. Expected: "${type.tsType}".`));
+	                if (type.tsType.indexOf(typeOf(params[prop])) === -1) {
+	                    errors.push(new Error(`Property "${prop}" has wrong format. Expected: "${type.tsType.join(', ')}".`));
 	                }
 	                if (!type.validate(params[prop])) {
 	                    errors.push(new Error(`Property "${prop}" has wrong value; validation was failed with value "${params[prop]}".`));
@@ -2033,38 +2060,12 @@ export namespace Protocol {
 	}
 	
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	* Injection: test.advanced.types.ts
-	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-	export const AdvancedTypes: { [key:string]: any} = {
-	    byte: {
-	        binaryType  : 'uint8',
-	        init        : '-1',
-	        parse       : (value: number) => { return value; },
-	        serialize   : (value: number) => { return value; },
-	        tsType      : 'number',
-	        validate    : (value: number) => { 
-	            if (typeof value !== 'number'){
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)){
-	                return false;
-	            }
-	            if (value < 0 || value > 255) {
-	                return false;
-	            }
-	            return true;
-	        },
-	    }
-	};
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	* Injection: injection.types.primitive.ts
 	* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 	
 	export interface IPrimitiveType<T> {
-	    tsType: string;
+	    tsType: string[];
+	    tsTypeDefault: string;
 	    binaryType: string;
 	    init: string;
 	    parse: (value: string | number | T) => T;
@@ -2080,7 +2081,8 @@ export namespace Protocol {
 	        init        : '0',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2103,7 +2105,8 @@ export namespace Protocol {
 	        init        : '0',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2126,7 +2129,8 @@ export namespace Protocol {
 	        init        : '0',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2149,18 +2153,10 @@ export namespace Protocol {
 	        init        : '0',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number', 'bigint'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
-	                return false;
-	            }
-	            if (value < 0) {
+	            if (typeof value !== 'bigint' && typeof value !== 'number') {
 	                return false;
 	            }
 	            return true;
@@ -2172,7 +2168,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2192,7 +2189,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2212,7 +2210,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2232,15 +2231,10 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number', 'bigint'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
-	            if (typeof value !== 'number') {
-	                return false;
-	            }
-	            if (isNaN(value)) {
-	                return false;
-	            }
-	            if (!Number.isInteger(value)) {
+	            if (typeof value !== 'bigint' && typeof value !== 'number') {
 	                return false;
 	            }
 	            return true;
@@ -2252,7 +2246,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2272,7 +2267,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2292,7 +2288,8 @@ export namespace Protocol {
 	        init        : '""',
 	        parse       : (value: string) => value,
 	        serialize   : (value: string) => value,
-	        tsType      : 'string',
+	        tsType      : ['string'],
+	        tsTypeDefault: 'string',
 	        validate    : (value: string) => {
 	            if (typeof value !== 'string') {
 	                return false;
@@ -2306,7 +2303,8 @@ export namespace Protocol {
 	        init        : '""',
 	        parse       : (value: string) => value,
 	        serialize   : (value: string) => value,
-	        tsType      : 'string',
+	        tsType      : ['string'],
+	        tsTypeDefault: 'string',
 	        validate    : (value: string) => {
 	            if (typeof value !== 'string') {
 	                return false;
@@ -2320,7 +2318,8 @@ export namespace Protocol {
 	        init        : '""',
 	        parse       : (value: string) => value,
 	        serialize   : (value: string) => value,
-	        tsType      : 'string',
+	        tsType      : ['string'],
+	        tsTypeDefault: 'string',
 	        validate    : (value: string) => {
 	            if (typeof value !== 'string') {
 	                return false;
@@ -2334,7 +2333,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2354,7 +2354,8 @@ export namespace Protocol {
 	        init        : '-1',
 	        parse       : (value: number) => value,
 	        serialize   : (value: number) => value,
-	        tsType      : 'number',
+	        tsType      : ['number'],
+	        tsTypeDefault: 'number',
 	        validate    : (value: number) => {
 	            if (typeof value !== 'number') {
 	                return false;
@@ -2371,7 +2372,8 @@ export namespace Protocol {
 	        init        : 'false',
 	        parse       : (value: boolean) => value,
 	        serialize   : (value: boolean) => value,
-	        tsType      : 'boolean',
+	        tsType      : ['boolean'],
+	        tsTypeDefault: 'boolean',
 	        validate    : (value: boolean) => {
 	            if (typeof value !== 'boolean') {
 	                return false;
@@ -2387,7 +2389,8 @@ export namespace Protocol {
 	            return new Date(value);
 	        },
 	        serialize   : (value: Date) => value.getTime(),
-	        tsType      : 'Date',
+	        tsType      : ['Date'],
+	        tsTypeDefault: 'Date',
 	        validate    : (value: number | Date) => {
 	            if (value instanceof Date) {
 	                return true;
@@ -2432,7 +2435,8 @@ export namespace Protocol {
 	        init            : 'guid()',
 	        parse           : (value: string) => value,
 	        serialize       : (value: string) => value,
-	        tsType          : 'string',
+	        tsType          : ['string'],
+	        tsTypeDefault   : 'string',
 	        validate        : (value: string) => {
 	            return typeof value === 'string' ? (value.trim() !== '' ? true : false) : false;
 	        },
@@ -3906,9 +3910,9 @@ export namespace Data {
 			public static parse(str: string | object): Protocol.TTypes | Error { return Protocol.parse(str, Request); }
 			public stringify(): Protocol.TStringifyOutput | Error { return Protocol.stringify(this, Request); }
 			public static instanceOf(target: any): boolean { return Protocol.isInstanceOf(Request.__signature, target); }
-			public binary: Array<number> = [];
+			public binary: Array<undefined> = [];
 
-			constructor(args: { clientId: string, guid?: string, binary: Array<number> }) {
+			constructor(args: { clientId: string, guid?: string, binary: Array<undefined> }) {
 				super(Object.assign(args, {}));
 				this.binary = args.binary;
 				const errors: Error[] = Protocol.validateParams(args, Request);

@@ -125,7 +125,7 @@ export namespace Json {
             public static toUint8(int: any): Uint8Array {
                 function setInt64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
                     const dw: DataView = new DataView(new ArrayBuffer(8));
-                    dw.setBigInt64(offset, value, littleEndian);
+                    dw.setBigInt64(offset, BigInt(value), littleEndian);
                     return new Uint8Array(dw.buffer);
                 }
                 return setInt64(int);
@@ -141,7 +141,7 @@ export namespace Json {
                     return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
                 }
                 const generated: number = this.fromUint8(this.toUint8(value));
-                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+                return generated == value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
             }
         }
         export class Uint8 {
@@ -271,7 +271,7 @@ export namespace Json {
             public static toUint8(int: any): Uint8Array {
                 function setUint64(value: any, offset: number = 0, littleEndian: boolean = true): Uint8Array {
                     const dw: DataView = new DataView(new ArrayBuffer(8));
-                    dw.setBigUint64(offset, value, littleEndian);
+                    dw.setBigUint64(offset, BigInt(value), littleEndian);
                     return new Uint8Array(dw.buffer);
                 }
                 return setUint64(int);
@@ -287,7 +287,7 @@ export namespace Json {
                     return new Error(`Invalid basic type: ${typeof value}. Expected type: number.`);
                 }
                 const generated: number = this.fromUint8(this.toUint8(value));
-                return generated === value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
+                return generated == value ? undefined : new Error(`Values dismatch. Original value: ${value}. Encoded & decoded value: ${generated}`);
             }
         }
     }

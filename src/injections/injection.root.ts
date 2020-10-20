@@ -433,8 +433,8 @@ export function validateParams(params: any, classRef: any): Error[] {
                 if (typeof desc.value === 'string') {
                     params[prop] = params[prop].map((value: any) => {
                         const nestedType = types[desc.value];
-                        if (typeOf(value) !== nestedType.tsType) {
-                            errors.push(new Error(`Property "${prop}" has wrong format. Expected an array (repeated) of "${nestedType.tsType}"`));
+                        if (nestedType.tsType.indexOf(typeOf(value)) === -1) {
+                            errors.push(new Error(`Property "${prop}" has wrong format. Expected an array (repeated) of "${nestedType.tsType.join(', ')}"`));
                         }
                     });
                 } else if (typeof desc.value === 'function') {
@@ -455,8 +455,8 @@ export function validateParams(params: any, classRef: any): Error[] {
                 break;
             case EEntityType.primitive:
                 const type = types[desc.value];
-                if (typeOf(params[prop]) !== type.tsType) {
-                    errors.push(new Error(`Property "${prop}" has wrong format. Expected: "${type.tsType}".`));
+                if (type.tsType.indexOf(typeOf(params[prop])) === -1) {
+                    errors.push(new Error(`Property "${prop}" has wrong format. Expected: "${type.tsType.join(', ')}".`));
                 }
                 if (!type.validate(params[prop])) {
                     errors.push(new Error(`Property "${prop}" has wrong value; validation was failed with value "${params[prop]}".`));

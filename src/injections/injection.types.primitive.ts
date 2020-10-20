@@ -1,6 +1,7 @@
 
 export interface IPrimitiveType<T> {
-    tsType: string;
+    tsType: string[];
+    tsTypeDefault: string;
     binaryType: string;
     init: string;
     parse: (value: string | number | T) => T;
@@ -16,7 +17,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '0',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -39,7 +41,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '0',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -62,7 +65,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '0',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -85,18 +89,10 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '0',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number', 'bigint'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
-            if (typeof value !== 'number') {
-                return false;
-            }
-            if (isNaN(value)) {
-                return false;
-            }
-            if (!Number.isInteger(value)) {
-                return false;
-            }
-            if (value < 0) {
+            if (typeof value !== 'bigint' && typeof value !== 'number') {
                 return false;
             }
             return true;
@@ -108,7 +104,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -128,7 +125,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -148,7 +146,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -168,15 +167,10 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number', 'bigint'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
-            if (typeof value !== 'number') {
-                return false;
-            }
-            if (isNaN(value)) {
-                return false;
-            }
-            if (!Number.isInteger(value)) {
+            if (typeof value !== 'bigint' && typeof value !== 'number') {
                 return false;
             }
             return true;
@@ -188,7 +182,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -208,7 +203,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -228,7 +224,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '""',
         parse       : (value: string) => value,
         serialize   : (value: string) => value,
-        tsType      : 'string',
+        tsType      : ['string'],
+        tsTypeDefault: 'string',
         validate    : (value: string) => {
             if (typeof value !== 'string') {
                 return false;
@@ -242,7 +239,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '""',
         parse       : (value: string) => value,
         serialize   : (value: string) => value,
-        tsType      : 'string',
+        tsType      : ['string'],
+        tsTypeDefault: 'string',
         validate    : (value: string) => {
             if (typeof value !== 'string') {
                 return false;
@@ -256,7 +254,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '""',
         parse       : (value: string) => value,
         serialize   : (value: string) => value,
-        tsType      : 'string',
+        tsType      : ['string'],
+        tsTypeDefault: 'string',
         validate    : (value: string) => {
             if (typeof value !== 'string') {
                 return false;
@@ -270,7 +269,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -290,7 +290,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : '-1',
         parse       : (value: number) => value,
         serialize   : (value: number) => value,
-        tsType      : 'number',
+        tsType      : ['number'],
+        tsTypeDefault: 'number',
         validate    : (value: number) => {
             if (typeof value !== 'number') {
                 return false;
@@ -307,7 +308,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init        : 'false',
         parse       : (value: boolean) => value,
         serialize   : (value: boolean) => value,
-        tsType      : 'boolean',
+        tsType      : ['boolean'],
+        tsTypeDefault: 'boolean',
         validate    : (value: boolean) => {
             if (typeof value !== 'boolean') {
                 return false;
@@ -323,7 +325,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
             return new Date(value);
         },
         serialize   : (value: Date) => value.getTime(),
-        tsType      : 'Date',
+        tsType      : ['Date'],
+        tsTypeDefault: 'Date',
         validate    : (value: number | Date) => {
             if (value instanceof Date) {
                 return true;
@@ -368,7 +371,8 @@ export const PrimitiveTypes:  { [key: string]: IPrimitiveType<any> } = {
         init            : 'guid()',
         parse           : (value: string) => value,
         serialize       : (value: string) => value,
-        tsType          : 'string',
+        tsType          : ['string'],
+        tsTypeDefault   : 'string',
         validate        : (value: string) => {
             return typeof value === 'string' ? (value.trim() !== '' ? true : false) : false;
         },

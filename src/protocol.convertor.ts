@@ -421,12 +421,11 @@ export class Convertor {
             const target: IEntity = entity.children[key];
             switch (target.type) {
                 case EEntityType.primitive:
-                    const type = this._entityType.getTypes()[target.value];
                     args.push({
                         name: target.name.replace(/\?/gi, ''),
                         optional: target.name.indexOf('?') !== -1,
                         protoType: target.value,
-                        tsType: this._entityType.getTypes()[target.value].tsType,
+                        tsType: this._entityType.getTypes()[target.value].tsTypeDefault,
                         type: target.type,
 
                     });
@@ -444,7 +443,7 @@ export class Convertor {
                     const typeAlias: string = this._entityType.getRepeatedType(target.value);
                     let tsType = '';
                     if (this._entityType.isPrimitive(typeAlias)) {
-                        tsType = this._entityType.getTypes()[typeAlias].tsType;
+                        tsType = this._entityType.getTypes()[typeAlias].tsTypeDefault;
                     } else {
                         tsType = this._findRefImpl(target.parent as IEntity, typeAlias);
                     }
@@ -829,7 +828,7 @@ export class Convertor {
                 break;
             case EEntityType.primitive:
                 const type = this._entityType.getTypes()[entity.value];
-                output += `${tab}public ${entity.name}: ${type.tsType} = ${type.init};\n`;
+                output += `${tab}public ${entity.name}: ${type.tsTypeDefault} = ${type.init};\n`;
                 break;
             case EEntityType.reference:
                 output += `${tab}public ${entity.name}: ${this._findRefImpl(entity.parent as IEntity, entity.value)};\n`;
@@ -838,7 +837,7 @@ export class Convertor {
                 const typeAlias: string = this._entityType.getRepeatedType(entity.value);
                 let tsType = '';
                 if (this._entityType.isPrimitive(typeAlias)) {
-                    tsType = this._entityType.getTypes()[typeAlias].tsType;
+                    tsType = this._entityType.getTypes()[typeAlias].tsTypeDefault;
                 } else {
                     tsType = this._findRefImpl(entity.parent as IEntity, typeAlias);
                 }
